@@ -1,0 +1,154 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Football Statics",
+    "version": "1.0.0",
+    "description": "Football Competitions Data API",
+    "x-contacts": [
+      {
+        "name": "Jacopo Malpesi",
+        "email": "jacopo.malpesi@edu.unito.it"
+      },
+      {
+        "name": "Simone Tantillo",
+        "email": "simone.tantillo@edu.unito.it"
+      },
+      {
+        "name": "Giuseppe Raso",
+        "email": "giuseppe.raso@edu.unito.it"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Main Express server competitions"
+    }
+  ],
+  "paths": {
+    "/competitions/getAllCompetitions": {
+      "get": {
+        "summary": "Retrieve a list of all competitions",
+        "responses": {
+          "200": {
+            "description": "A list of all competitions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "competitions": [
+                    {
+                      "competitionId": "CIT",
+                      "competitionCode": "italy-cup",
+                      "name": "italy-cup",
+                      "subType": "domestic_cup",
+                      "type": "domestic_cup",
+                      "countryId": 75,
+                      "countryName": "Italy",
+                      "domesticLeagueCode": "IT1",
+                      "confederation": "europa",
+                      "url": "https://www.transfermarkt.co.uk/italy-cup/startseite/wettbewerb/CIT"
+                    },
+                    {
+                      "competitionId": "GRP",
+                      "competitionCode": "kypello-elladas",
+                      "name": "kypello-elladas",
+                      "subType": "domestic_cup",
+                      "type": "domestic_cup",
+                      "countryId": 56,
+                      "countryName": "Greece",
+                      "domesticLeagueCode": "GR1",
+                      "confederation": "europa",
+                      "url": "https://www.transfermarkt.co.uk/kypello-elladas/startseite/wettbewerb/GRP"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No competitions found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/competitions/getAllDomesticCompetitions": {
+      "get": {
+        "summary": "Retrieve a list of all domestic competitions",
+        "responses": {
+          "200": {
+            "description": "A list of all domestic competitions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "domesticCompetitions": [
+                    {
+                      "competitionId": "ES1",
+                      "competitionCode": "laliga",
+                      "name": "laliga",
+                      "subType": "first_tier",
+                      "type": "domestic_league",
+                      "countryId": 157,
+                      "countryName": "Spain",
+                      "domesticLeagueCode": "ES1",
+                      "confederation": "europa",
+                      "url": "https://www.transfermarkt.co.uk/laliga/startseite/wettbewerb/ES1"
+                    },
+                    {
+                      "competitionId": "FR1",
+                      "competitionCode": "ligue-1",
+                      "name": "ligue-1",
+                      "subType": "first_tier",
+                      "type": "domestic_league",
+                      "countryId": 50,
+                      "countryName": "France",
+                      "domesticLeagueCode": "FR1",
+                      "confederation": "europa",
+                      "url": "https://www.transfermarkt.co.uk/ligue-1/startseite/wettbewerb/FR1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No domestic competitions found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Football Statics",
+    "version": "1.0.0",
+    "description": "Football Games Data API",
+    "x-contacts": [
+      {
+        "name": "Jacopo Malpesi",
+        "email": "jacopo.malpesi@edu.unito.it"
+      },
+      {
+        "name": "Simone Tantillo",
+        "email": "simone.tantillo@edu.unito.it"
+      },
+      {
+        "name": "Giuseppe Raso",
+        "email": "giuseppe.raso@edu.unito.it"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Main Express server games"
+    }
+  ],
+  "paths": {
+    "/games/getAllSeasonOfCompetitionMongo": {
+      "get": {
+        "summary": "Retrieve all seasons for a competition",
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "The ID of the competition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All seasons for the competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "example": 2023
+                  },
+                  "example": [
+                    2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/games/getRoundsOfSeasonMongo": {
+      "get": {
+        "summary": "Retrieve all rounds for a season of a competition",
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "The ID of the competition"
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2020
+            },
+            "description": "The season of the competition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All rounds for the season of the competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "1. Matchday"
+                  },
+                  "example": [
+                    "1. Matchday", "2. Matchday", "3. Matchday", "4. Matchday", "5. Matchday", "6. Matchday",
+                    "7. Matchday", "8. Matchday", "9. Matchday", "10. Matchday", "11. Matchday", "12. Matchday",
+                    "13. Matchday", "14. Matchday", "15. Matchday", "16. Matchday", "17. Matchday", "18. Matchday",
+                    "19. Matchday", "20. Matchday", "21. Matchday", "22. Matchday", "23. Matchday", "24. Matchday",
+                    "25. Matchday", "26. Matchday", "27. Matchday", "28. Matchday", "29. Matchday", "30. Matchday",
+                    "31. Matchday", "32. Matchday", "33. Matchday", "34. Matchday", "35. Matchday", "36. Matchday",
+                    "37. Matchday", "38. Matchday"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/games/getGamesOfRoundOfSeasonMongo": {
+      "get": {
+        "summary": "Retrieve all games for a round of a season of a competition",
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "The ID of the competition"
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+                "example": 2020
+            },
+            "description": "The season of the competition"
+          },
+          {
+            "name": "round",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6. Matchday"
+            },
+            "description": "The round of the season"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All games for the round of the season of the competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "662131f89a96b6774126a525"
+                      },
+                      "game_id": {
+                        "type": "integer",
+                        "example": 3433236
+                      },
+                      "competition_id": {
+                        "type": "string",
+                        "example": "IT1"
+                      },
+                      "season": {
+                        "type": "integer",
+                        "example": 2020
+                      },
+                      "round": {
+                        "type": "string",
+                        "example": "6. Matchday"
+                      },
+                      "date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2020-10-31T00:00:00.000Z"
+                      },
+                      "home_club_id": {
+                        "type": "integer",
+                        "example": 4083
+                      },
+                      "away_club_id": {
+                        "type": "integer",
+                        "example": 800
+                      },
+                      "home_club_goals": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "away_club_goals": {
+                        "type": "integer",
+                        "example": 2
+                      },
+                      "home_club_position": {
+                        "type": "integer",
+                        "example": 20
+                      },
+                      "away_club_position": {
+                        "type": "integer",
+                        "example": 5
+                      },
+                      "home_club_manager_name": {
+                        "type": "string",
+                        "example": "Giovanni Stroppa"
+                      },
+                      "away_club_manager_name": {
+                        "type": "string",
+                        "example": "Gian Piero Gasperini"
+                      },
+                      "stadium": {
+                        "type": "string",
+                        "example": "Ezio Scida"
+                      },
+                      "referee": {
+                        "type": "string",
+                        "example": "Federico Dionisi"
+                      },
+                      "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "example": "https://www.transfermarkt.co.uk/fc-crotone_atalanta-bc/index/spielbericht/3433236"
+                      },
+                      "home_club_name": {
+                        "type": "string",
+                        "example": "FC Crotone"
+                      },
+                      "away_club_name": {
+                        "type": "string",
+                        "example": "Atalanta Bergamasca Calcio S.p.a."
+                      },
+                      "aggregate": {
+                        "type": "string",
+                        "example": "1:2"
+                      },
+                      "competition_type": {
+                        "type": "string",
+                        "example": "domestic_league"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "_id": "662131f89a96b6774126a525",
+                    "game_id": 3433236,
+                    "competition_id": "IT1",
+                    "season": 2020,
+                    "round": "6. Matchday",
+                    "date": "2020-10-31T00:00:00.000Z",
+                    "home_club_id": 4083,
+                    "away_club_id": 800,
+                    "home_club_goals": 1,
+                    "away_club_goals": 2,
+                    "home_club_position": 20,
+                    "away_club_position": 5,
+                    "home_club_manager_name": "Giovanni Stroppa",
+                    "away_club_manager_name": "Gian Piero Gasperini",
+                    "stadium": "Ezio Scida",
+                    "referee": "Federico Dionisi",
+                    "url": "https://www.transfermarkt.co.uk/fc-crotone_atalanta-bc/index/spielbericht/3433236",
+                    "home_club_name": "FC Crotone",
+                    "away_club_name": "Atalanta Bergamasca Calcio S.p.a.",
+                    "aggregate": "1:2",
+                    "competition_type": "domestic_league"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    }
+  }
+}

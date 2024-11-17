@@ -1,0 +1,17 @@
+{
+  "name": "mongoservergames",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "serve": "node ./routes/index.js"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~4.3.4",
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.2.3",
+    "morgan": "~1.9.1"
+  }
+}

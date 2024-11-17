@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "swagger": "^0.7.5",
+    "swagger-ui-express": "^5.0.1",
+    "axios": "^1.6.8",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "morgan": "~1.9.1",
+    "socket.io": "^4.4.1",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.2.3"
+  }
+}

@@ -1,0 +1,318 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Football Statics",
+    "version": "1.0.0",
+    "description": "Football Squad Selected Data API",
+    "x-contacts": [
+      {
+        "name": "Jacopo Malpesi",
+        "email": "jacopo.malpesi@edu.unito.it"
+      },
+      {
+        "name": "Simone Tantillo",
+        "email": "simone.tantillo@edu.unito.it"
+      },
+      {
+        "name": "Giuseppe Raso",
+        "email": "giuseppe.raso@edu.unito.it"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Main Express server squads"
+    }
+  ],
+  "paths": {
+    "/squadSelected/getInfoClubSelected": {
+      "get": {
+        "summary": "Retrieve information about a selected club",
+        "parameters": [
+          {
+            "name": "clubId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 281
+            },
+            "description": "ID of the club"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Club information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 281
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Manchester City Football Club"
+                    },
+                    "shortName": {
+                      "type": "string",
+                      "example": "Manchester City"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "GB1"
+                    },
+                    "numPlayers": {
+                      "type": "integer",
+                      "example": 24
+                    },
+                    "averageAge": {
+                      "type": "number",
+                      "example": 27.2
+                    },
+                    "foreignPlayers": {
+                      "type": "integer",
+                      "example": 17
+                    },
+                    "averageMarketValue": {
+                      "type": "number",
+                      "example": 70.8
+                    },
+                    "stadiumName": {
+                      "type": "string",
+                      "example": "Etihad Stadium"
+                    },
+                    "stadiumCapacity": {
+                      "type": "integer",
+                      "example": 55017
+                    },
+                    "totalMarketValue": {
+                      "type": "string",
+                      "example": "€-126.60m"
+                    },
+                    "season": {
+                      "type": "integer",
+                      "example": 2023
+                    },
+                    "url": {
+                      "type": "string",
+                      "example": "https://www.transfermarkt.co.uk/manchester-city/startseite/verein/281"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Club not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Club not found for the specified clubId"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching club data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error while retrieving club information"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/squadSelected/getPlayerSquad": {
+      "get": {
+        "summary": "Retrieve players in a selected club's squad",
+        "parameters": [
+          {
+            "name": "clubId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 281
+            },
+            "description": "ID of the club"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Players in squad retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "imageUrl": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": 418560,
+                      "name": "Erling Haaland",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/418560-1694590614.jpg?lm=1"
+                    },
+                    {
+                      "id": 406635,
+                      "name": "Phil Foden",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/406635-1668524492.jpg?lm=1"
+                    },
+                    {
+                      "id": 357565,
+                      "name": "Rodri",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/357565-1682587890.jpg?lm=1"
+                    },
+                    {
+                      "id": 241641,
+                      "name": "Bernardo Silva",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/241641-1684311533.jpg?lm=1"
+                    },
+                    {
+                      "id": 576024,
+                      "name": "Julián Álvarez",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/576024-1684920938.jpg?lm=1"
+                    },
+                    {
+                      "id": 475959,
+                      "name": "Josko Gvardiol",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/475959-1663685941.jpg?lm=1"
+                    },
+                    {
+                      "id": 258004,
+                      "name": "Rúben Dias",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/258004-1684921271.jpg?lm=1"
+                    },
+                    {
+                      "id": 203460,
+                      "name": "Jack Grealish",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/203460-1676499047.jpg?lm=1"
+                    },
+                    {
+                      "id": 88755,
+                      "name": "Kevin De Bruyne",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/88755-1684245748.jpg?lm=1"
+                    },
+                    {
+                      "id": 486049,
+                      "name": "Jérémy Doku",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/486049-1666699113.jpg?lm=1"
+                    },
+                    {
+                      "id": 601883,
+                      "name": "Matheus Nunes",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/601883-1693561106.jpg?lm=1"
+                    },
+                    {
+                      "id": 177476,
+                      "name": "Nathan Aké",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/177476-1666733797.jpg?lm=1"
+                    },
+                    {
+                      "id": 238223,
+                      "name": "Ederson",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/238223-1661978747.jpg?lm=1"
+                    },
+                    {
+                      "id": 186590,
+                      "name": "John Stones",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/186590-1684764261.jpg?lm=1"
+                    },
+                    {
+                      "id": 51471,
+                      "name": "Mateo Kovacic",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/51471-1682668192.jpg?lm=1"
+                    },
+                    {
+                      "id": 284730,
+                      "name": "Manuel Akanji",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/284730-1684165752.jpg?lm=1"
+                    },
+                    {
+                      "id": 351749,
+                      "name": "Kalvin Phillips",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/351749-1661978510.jpg?lm=1"
+                    },
+                    {
+                      "id": 701057,
+                      "name": "Rico Lewis",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/701057-1684856684.jpg?lm=1"
+                    },
+                    {
+                      "id": 95424,
+                      "name": "Kyle Walker",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/95424-1668090663.jpg?lm=1"
+                    },
+                    {
+                      "id": 366930,
+                      "name": "Sergio Gómez",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/366930-1660209686.jpg?lm=1"
+                    },
+                    {
+                      "id": 661207,
+                      "name": "Oscar Bobb",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/661207-1648828348.png?lm=1"
+                    },
+                    {
+                      "id": 85941,
+                      "name": "Stefan Ortega",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/85941-1668065114.jpg?lm=1"
+                    },
+                    {
+                      "id": 221624,
+                      "name": "Zack Steffen",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/221624-1665127241.jpg?lm=1"
+                    },
+                    {
+                      "id": 14555,
+                      "name": "Scott Carson",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/14555-1666733622.jpg?lm=1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Players not found for the specified club",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Players not found for the specified clubId"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching player data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error while retrieving player squad information"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

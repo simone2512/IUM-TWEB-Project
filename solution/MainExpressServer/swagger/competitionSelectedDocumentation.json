@@ -1,0 +1,237 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Football Statics",
+    "version": "1.0.0",
+    "description": "Football Competition Selected Data API",
+    "x-contacts": [
+      {
+        "name": "Jacopo Malpesi",
+        "email": "jacopo.malpesi@edu.unito.it"
+      },
+      {
+        "name": "Simone Tantillo",
+        "email": "simone.tantillo@edu.unito.it"
+      },
+      {
+        "name": "Giuseppe Raso",
+        "email": "giuseppe.raso@edu.unito.it"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Main Express server competitionSelected"
+    }
+  ],
+  "paths": {
+    "/competitionSelected/getInfoCompetitionSelected": {
+      "get": {
+        "summary": "Retrieve information about a selected competition",
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "The ID of the competition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Information about the selected competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "IT1,serie-a,serie-a,first_tier,domestic_league,75,Italy,IT1,europa,https://www.transfermarkt.co.uk/serie-a/startseite/wettbewerb/IT1"
+
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No competition found with the provided ID"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/competitionSelected/getLeadboardMongo": {
+      "get": {
+        "summary": "Retrieve the leaderboard for a selected competition",
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "The ID of the competition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Leaderboard for the selected competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": { "type": "string" },
+                      "nome": { "type": "string" },
+                      "punti": { "type": "integer" },
+                      "partiteGiocate": { "type": "integer" },
+                      "vittorie": { "type": "integer" },
+                      "pareggi": { "type": "integer" },
+                      "sconfitte": { "type": "integer" }
+                    }
+                  },
+                  "example": [
+                    {
+                      "_id": "Football Club Internazionale Milano S.p.A.",
+                      "nome": "Football Club Internazionale Milano S.p.A.",
+                      "punti": 32,
+                      "partiteGiocate": 13,
+                      "vittorie": 10,
+                      "pareggi": 2,
+                      "sconfitte": 1
+                    },
+                    {
+                      "_id": "Juventus Football Club",
+                      "nome": "Juventus Football Club",
+                      "punti": 30,
+                      "partiteGiocate": 13,
+                      "vittorie": 9,
+                      "pareggi": 3,
+                      "sconfitte": 1
+                    }
+                  ]
+                }
+              }
+            }
+          },
+
+          "404": {
+            "description": "No data found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No leaderboard data found for the provided competition ID"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/competitionSelected/getRollOfHonourMongo": {
+      "get": {
+        "summary": "Retrieve the roll of honour for a selected competition",
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "CIT"
+            },
+            "description": "The ID of the competition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Roll of honour for the selected competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "season": {"type": "integer"},
+                      "winner_id": {"type": "integer"},
+                      "winner": {"type": "string"}
+                    }
+                  },
+                  "example": [
+                    {
+                      "season": 2012,
+                      "winner_id": 398,
+                      "winner": "Società Sportiva Lazio S.p.A."
+                    },
+                    {
+                      "season": 2013,
+                      "winner_id": 61965,
+                      "winner": "Società Sportiva Calcio Napoli"
+                    },
+                    {
+                      "season": 2014,
+                      "winner_id": 506,
+                      "winner": "Juventus Football Club"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No roll of honour data found for the provided competition ID"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

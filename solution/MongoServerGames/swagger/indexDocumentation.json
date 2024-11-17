@@ -1,0 +1,1218 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Football Statics",
+    "description": "Football Competitions Data API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Mongo Server"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Render home page",
+        "servers": [
+          {
+            "url": "http://localhost:3001"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Home page rendered",
+            "content": {
+              "text/html": {
+                "example": "<html><head><title>Express</title></head><body>Express</body></html>"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getLeadboardMongoDB": {
+      "get": {
+        "summary": "Get leaderboard data for a competition","servers": [
+          {
+            "url": "http://localhost:3001"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "Competition ID to query leaderboard data"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Leaderboard data",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "_id": "Football Club Internazionale Milano S.p.A.",
+                    "nome": "Football Club Internazionale Milano S.p.A.",
+                    "punti": 32,
+                    "partiteGiocate": 13,
+                    "vittorie": 10,
+                    "pareggi": 2,
+                    "sconfitte": 1
+                  },
+                  {
+                    "_id": "Juventus Football Club",
+                    "nome": "Juventus Football Club",
+                    "punti": 30,
+                    "partiteGiocate": 13,
+                    "vittorie": 9,
+                    "pareggi": 3,
+                    "sconfitte": 1
+                  },
+                  {
+                    "_id": "Associazione Calcio Milan",
+                    "nome": "Associazione Calcio Milan",
+                    "punti": 26,
+                    "partiteGiocate": 13,
+                    "vittorie": 8,
+                    "pareggi": 2,
+                    "sconfitte": 3
+                  },
+                  {
+                    "_id": "Società Sportiva Calcio Napoli",
+                    "nome": "Società Sportiva Calcio Napoli",
+                    "punti": 24,
+                    "partiteGiocate": 13,
+                    "vittorie": 7,
+                    "pareggi": 3,
+                    "sconfitte": 3
+                  },
+                  {
+                    "_id": "Bologna Football Club 1909",
+                    "nome": "Bologna Football Club 1909",
+                    "punti": 21,
+                    "partiteGiocate": 13,
+                    "vittorie": 5,
+                    "pareggi": 6,
+                    "sconfitte": 2
+                  },
+                  {
+                    "_id": "Associazione Sportiva Roma",
+                    "nome": "Associazione Sportiva Roma",
+                    "punti": 21,
+                    "partiteGiocate": 13,
+                    "vittorie": 6,
+                    "pareggi": 3,
+                    "sconfitte": 4
+                  },
+                  {
+                    "_id": "Associazione Calcio Fiorentina",
+                    "nome": "Associazione Calcio Fiorentina",
+                    "punti": 20,
+                    "partiteGiocate": 13,
+                    "vittorie": 6,
+                    "pareggi": 2,
+                    "sconfitte": 5
+                  },
+                  {
+                    "_id": "Atalanta Bergamasca Calcio S.p.a.",
+                    "nome": "Atalanta Bergamasca Calcio S.p.a.",
+                    "punti": 20,
+                    "partiteGiocate": 13,
+                    "vittorie": 6,
+                    "pareggi": 2,
+                    "sconfitte": 5
+                  },
+                  {
+                    "_id": "Associazione Calcio Monza",
+                    "nome": "Associazione Calcio Monza",
+                    "punti": 18,
+                    "partiteGiocate": 13,
+                    "vittorie": 4,
+                    "pareggi": 6,
+                    "sconfitte": 3
+                  },
+                  {
+                    "_id": "Frosinone Calcio S.r.l.",
+                    "nome": "Frosinone Calcio S.r.l.",
+                    "punti": 18,
+                    "partiteGiocate": 13,
+                    "vittorie": 5,
+                    "pareggi": 3,
+                    "sconfitte": 5
+                  },
+                  {
+                    "_id": "Società Sportiva Lazio S.p.A.",
+                    "nome": "Società Sportiva Lazio S.p.A.",
+                    "punti": 17,
+                    "partiteGiocate": 13,
+                    "vittorie": 5,
+                    "pareggi": 2,
+                    "sconfitte": 6
+                  },
+                  {
+                    "_id": "Torino Calcio",
+                    "nome": "Torino Calcio",
+                    "punti": 16,
+                    "partiteGiocate": 13,
+                    "vittorie": 4,
+                    "pareggi": 4,
+                    "sconfitte": 5
+                  },
+                  {
+                    "_id": "Unione Sportiva Sassuolo Calcio",
+                    "nome": "Unione Sportiva Sassuolo Calcio",
+                    "punti": 15,
+                    "partiteGiocate": 13,
+                    "vittorie": 4,
+                    "pareggi": 3,
+                    "sconfitte": 6
+                  },
+                  {
+                    "_id": "Unione Sportiva Lecce",
+                    "nome": "Unione Sportiva Lecce",
+                    "punti": 15,
+                    "partiteGiocate": 13,
+                    "vittorie": 3,
+                    "pareggi": 6,
+                    "sconfitte": 4
+                  },
+                  {
+                    "_id": "Genoa Cricket and Football Club",
+                    "nome": "Genoa Cricket and Football Club",
+                    "punti": 14,
+                    "partiteGiocate": 13,
+                    "vittorie": 4,
+                    "pareggi": 2,
+                    "sconfitte": 7
+                  },
+                  {
+                    "_id": "Udinese Calcio",
+                    "nome": "Udinese Calcio",
+                    "punti": 11,
+                    "partiteGiocate": 13,
+                    "vittorie": 1,
+                    "pareggi": 8,
+                    "sconfitte": 4
+                  },
+                  {
+                    "_id": "Cagliari Calcio",
+                    "nome": "Cagliari Calcio",
+                    "punti": 10,
+                    "partiteGiocate": 13,
+                    "vittorie": 2,
+                    "pareggi": 4,
+                    "sconfitte": 7
+                  },
+                  {
+                    "_id": "Empoli Football Club S.r.l.",
+                    "nome": "Empoli Football Club S.r.l.",
+                    "punti": 10,
+                    "partiteGiocate": 13,
+                    "vittorie": 3,
+                    "pareggi": 1,
+                    "sconfitte": 9
+                  },
+                  {
+                    "_id": "Verona Hellas Football Club",
+                    "nome": "Verona Hellas Football Club",
+                    "punti": 9,
+                    "partiteGiocate": 13,
+                    "vittorie": 2,
+                    "pareggi": 3,
+                    "sconfitte": 8
+                  },
+                  {
+                    "_id": "U.S. Salernitana 1919 S.r.l.",
+                    "nome": "U.S. Salernitana 1919 S.r.l.",
+                    "punti": 8,
+                    "partiteGiocate": 13,
+                    "vittorie": 1,
+                    "pareggi": 5,
+                    "sconfitte": 7
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No clubs of competition found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No clubs of competition found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getRollOfHonourMongoDB": {
+      "get": {
+        "summary": "Get roll of honour data for a competition",
+        "servers": [
+          {
+            "url": "http://localhost:3001"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "CIT"
+            },
+            "description": "Competition ID to query roll of honour data"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Roll of honour data",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "season": 2012,
+                    "winner_id": 398,
+                    "winner": "Società Sportiva Lazio S.p.A."
+                  },
+                  {
+                    "season": 2013,
+                    "winner_id": 6195,
+                    "winner": "Società Sportiva Calcio Napoli"
+                  },
+                  {
+                    "season": 2014,
+                    "winner_id": 506,
+                    "winner": "Juventus Football Club"
+                  },
+                  {
+                    "season": 2015,
+                    "winner_id": 506,
+                    "winner": "Juventus Football Club"
+                  },
+                  {
+                    "season": 2016,
+                    "winner_id": 506,
+                    "winner": "Juventus Football Club"
+                  },
+                  {
+                    "season": 2017,
+                    "winner_id": 506,
+                    "winner": "Juventus Football Club"
+                  },
+                  {
+                    "season": 2018,
+                    "winner_id": 398,
+                    "winner": "Società Sportiva Lazio S.p.A."
+                  },
+                  {
+                    "season": 2019,
+                    "winner_id": 6195,
+                    "winner": "Società Sportiva Calcio Napoli"
+                  },
+                  {
+                    "season": 2020,
+                    "winner_id": 506,
+                    "winner": "Juventus Football Club"
+                  },
+                  {
+                    "season": 2021,
+                    "winner_id": 46,
+                    "winner": "Football Club Internazionale Milano S.p.A."
+                  },
+                  {
+                    "season": 2022,
+                    "winner_id": 46,
+                    "winner": "Football Club Internazionale Milano S.p.A."
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No clubs of competition found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No clubs of competition found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getClubsMongoDB": {
+      "get": {
+        "summary": "Get clubs participating in a competition",
+        "servers": [
+          {
+            "url": "http://localhost:3001"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "Competition ID to query clubs data"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Clubs data",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "club_id": 5,
+                    "club_name": "Associazione Calcio Milan"
+                  },
+                  {
+                    "club_id": 12,
+                    "club_name": "Associazione Sportiva Roma"
+                  },
+                  {
+                    "club_id": 46,
+                    "club_name": "Football Club Internazionale Milano S.p.A."
+                  },
+                  {
+                    "club_id": 252,
+                    "club_name": "Genoa Cricket and Football Club"
+                  },
+                  {
+                    "club_id": 276,
+                    "club_name": "Verona Hellas Football Club"
+                  },
+                  {
+                    "club_id": 380,
+                    "club_name": "U.S. Salernitana 1919 S.r.l."
+                  },
+                  {
+                    "club_id": 398,
+                    "club_name": "Società Sportiva Lazio S.p.A."
+                  },
+                  {
+                    "club_id": 410,
+                    "club_name": "Udinese Calcio"
+                  },
+                  {
+                    "club_id": 416,
+                    "club_name": "Torino Calcio"
+                  },
+                  {
+                    "club_id": 430,
+                    "club_name": "Associazione Calcio Fiorentina"
+                  },
+                  {
+                    "club_id": 506,
+                    "club_name": "Juventus Football Club"
+                  },
+                  {
+                    "club_id": 749,
+                    "club_name": "Empoli Football Club S.r.l."
+                  },
+                  {
+                    "club_id": 800,
+                    "club_name": "Atalanta Bergamasca Calcio S.p.a."
+                  },
+                  {
+                    "club_id": 1005,
+                    "club_name": "Unione Sportiva Lecce"
+                  },
+                  {
+                    "club_id": 1025,
+                    "club_name": "Bologna Football Club 1909"
+                  },
+                  {
+                    "club_id": 1390,
+                    "club_name": "Cagliari Calcio"
+                  },
+                  {
+                    "club_id": 2919,
+                    "club_name": "Associazione Calcio Monza"
+                  },
+                  {
+                    "club_id": 6195,
+                    "club_name": "Società Sportiva Calcio Napoli"
+                  },
+                  {
+                    "club_id": 6574,
+                    "club_name": "Unione Sportiva Sassuolo Calcio"
+                  },
+                  {
+                    "club_id": 8970,
+                    "club_name": "Frosinone Calcio S.r.l."
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No clubs of competition found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No clubs of competition found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getInfoGameDB": {
+      "get": {
+        "summary": "Get information about a specific game",
+        "servers": [
+          {
+            "url": "http://localhost:3001"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "4087953"
+            },
+            "description": "Game ID to query game details"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Game details",
+            "content": {
+              "application/json": {
+                "example": {
+                  "game_id": 4087953,
+                  "competition_id": "GB1",
+                  "round": "3. Matchday",
+                  "date": "2023-08-27T00:00:00.000Z",
+                  "home_club_id": 350,
+                  "away_club_id": 281,
+                  "home_club_goals": 1,
+                  "away_club_goals": 2,
+                  "stadium": "Bramall Lane",
+                  "attendance": 31336,
+                  "referee": "Jarred Gillett",
+                  "home_club_name": "Sheffield United Football Club",
+                  "away_club_name": "Manchester City Football Club"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No game found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No game found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getInfoGameEventDB": {
+      "get": {
+        "summary": "Get game events for a specific game",
+        "servers": [
+          {
+            "url": "http://localhost:3001"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "4087953"
+            },
+            "description": "Game ID to query game events"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Game events",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "_id": "660e59f5e65856861ef36c53",
+                    "game_id": 4087953,
+                    "minute": 83,
+                    "type": "Cards",
+                    "club_id": 350,
+                    "player_id": 121324,
+                    "description": "1. Yellow card  , Foul"
+                  },
+                  {
+                    "_id": "660e59f5e65856861ef36c54",
+                    "game_id": 4087953,
+                    "minute": 45,
+                    "type": "Cards",
+                    "club_id": 350,
+                    "player_id": 146690,
+                    "description": "1. Yellow card  , Foul"
+                  },
+                  {
+                    "_id": "660e59f5e65856861ef36c57",
+                    "game_id": 4087953,
+                    "minute": 88,
+                    "type": "Goals",
+                    "club_id": 281,
+                    "player_id": 357565,
+                    "description": ", Left-footed shot, 2. Goal of the Season Assist: , Pass, 2. Assist of the Season"
+                  },
+                  {
+                    "_id": "660e59f5e65856861ef36c58",
+                    "game_id": 4087953,
+                    "minute": 63,
+                    "type": "Goals",
+                    "club_id": 281,
+                    "player_id": 418560,
+                    "description": ", Header, 3. Goal of the Season Assist: , Cross, 1. Assist of the Season"
+                  },
+                  {
+                    "_id": "660e59f5e65856861ef36c59",
+                    "game_id": 4087953,
+                    "minute": 85,
+                    "type": "Goals",
+                    "club_id": 350,
+                    "player_id": 465717,
+                    "description": ", Right-footed shot, 1. Goal of the Season"
+                  },
+                  {
+                    "_id": "660e59f5e65856861ef36c5a",
+                    "game_id": 4087953,
+                    "minute": 59,
+                    "type": "Cards",
+                    "club_id": 350,
+                    "player_id": 609556,
+                    "description": "2. Yellow card  , Foul"
+                  },
+                  {
+                    "_id": "660e59f5e65856861ef36c5c",
+                    "game_id": 4087953,
+                    "minute": 77,
+                    "type": "Cards",
+                    "club_id": 350,
+                    "player_id": 663581,
+                    "description": "1. Yellow card  , Foul"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No events found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No events found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getSeasonsCompetitionMongoDB": {
+      "get": {
+        "summary": "Get seasons for a specific competition",
+        "servers": [
+          {
+            "url": "http://localhost:3001"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "Competition ID to query seasons"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Seasons data",
+            "content": {
+              "application/json": {
+                "example": [
+                  2023,
+                  2022,
+                  2021,
+                  2020,
+                  2019,
+                  2018,
+                  2017,
+                  2016,
+                  2015,
+                  2014,
+                  2013,
+                  2012
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No seasons found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No seasons found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getRoundsOfSeasonMongoDB": {
+      "get": {
+        "summary": "Get rounds for a specific season of a competition",
+        "servers": [
+          {
+            "url": "http://localhost:3001"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "Competition ID to query rounds"
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2020
+            },
+            "description": "Season to query rounds"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rounds data",
+            "content": {
+              "application/json": {
+                "example": [
+                  "1. Matchday",
+                  "2. Matchday",
+                  "3. Matchday",
+                  "4. Matchday",
+                  "5. Matchday",
+                  "6. Matchday",
+                  "7. Matchday",
+                  "8. Matchday",
+                  "9. Matchday",
+                  "10. Matchday",
+                  "11. Matchday",
+                  "12. Matchday",
+                  "13. Matchday",
+                  "14. Matchday",
+                  "15. Matchday",
+                  "16. Matchday",
+                  "17. Matchday",
+                  "18. Matchday",
+                  "19. Matchday",
+                  "20. Matchday",
+                  "21. Matchday",
+                  "22. Matchday",
+                  "23. Matchday",
+                  "24. Matchday",
+                  "25. Matchday",
+                  "26. Matchday",
+                  "27. Matchday",
+                  "28. Matchday",
+                  "29. Matchday",
+                  "30. Matchday",
+                  "31. Matchday",
+                  "32. Matchday",
+                  "33. Matchday",
+                  "34. Matchday",
+                  "35. Matchday",
+                  "36. Matchday",
+                  "37. Matchday",
+                  "38. Matchday"
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No rounds found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No rounds found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getGamesRoundOfSeasonMongoDB": {
+      "get": {
+        "summary": "Get games for a specific round of a season",
+        "servers": [
+          {
+            "url": "http://localhost:3001"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "Competition ID to query games"
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2020
+            },
+            "description": "Season to query games"
+          },
+          {
+            "name": "round",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "8. Matchday"
+            },
+            "description": "Round to query games"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Games data",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "_id": "660e595be65856861ee736fd",
+                    "game_id": 3433442,
+                    "competition_id": "IT1",
+                    "season": 2020,
+                    "round": "26. Matchday",
+                    "date": "2021-03-07T00:00:00.000Z",
+                    "home_club_id": 430,
+                    "away_club_id": 130,
+                    "home_club_goals": 3,
+                    "away_club_goals": 3,
+                    "home_club_position": 15,
+                    "away_club_position": 19,
+                    "home_club_manager_name": "Cesare Prandelli",
+                    "away_club_manager_name": "Roberto D'Aversa",
+                    "stadium": "Artemio Franchi",
+                    "referee": "Rosario Abisso",
+                    "url": "https://www.transfermarkt.co.uk/acf-fiorentina_parma-calcio-1913/index/spielbericht/3433442",
+                    "home_club_name": "Associazione Calcio Fiorentina",
+                    "away_club_name": "Parma Calcio 1913",
+                    "aggregate": "3:3",
+                    "competition_type": "domestic_league"
+                  },
+                  {
+                    "_id": "660e595ce65856861ee7432a",
+                    "game_id": 3433440,
+                    "competition_id": "IT1",
+                    "season": 2020,
+                    "round": "26. Matchday",
+                    "date": "2021-03-06T00:00:00.000Z",
+                    "home_club_id": 506,
+                    "away_club_id": 398,
+                    "home_club_goals": 3,
+                    "away_club_goals": 1,
+                    "home_club_position": 3,
+                    "away_club_position": 7,
+                    "home_club_manager_name": "Andrea Pirlo",
+                    "away_club_manager_name": "Simone Inzaghi",
+                    "stadium": "Allianz Stadium",
+                    "referee": "Davide Massa",
+                    "url": "https://www.transfermarkt.co.uk/juventus-fc_ss-lazio/index/spielbericht/3433440",
+                    "home_club_name": "Juventus Football Club",
+                    "away_club_name": "Società Sportiva Lazio S.p.A.",
+                    "aggregate": "3:1",
+                    "competition_type": "domestic_league"
+                  },
+                  {
+                    "_id": "660e595ce65856861ee7512f",
+                    "game_id": 3433441,
+                    "competition_id": "IT1",
+                    "season": 2020,
+                    "round": "26. Matchday",
+                    "date": "2021-03-07T00:00:00.000Z",
+                    "home_club_id": 276,
+                    "away_club_id": 5,
+                    "home_club_goals": 0,
+                    "away_club_goals": 2,
+                    "home_club_position": 8,
+                    "away_club_position": 2,
+                    "home_club_manager_name": "Ivan Juric",
+                    "away_club_manager_name": "Stefano Pioli",
+                    "stadium": "Marcantonio Bentegodi",
+                    "referee": "Daniele Orsato",
+                    "url": "https://www.transfermarkt.co.uk/hellas-verona_ac-milan/index/spielbericht/3433441",
+                    "home_club_name": "Verona Hellas Football Club",
+                    "away_club_name": "Associazione Calcio Milan",
+                    "aggregate": "0:2",
+                    "competition_type": "domestic_league"
+                  },
+                  {
+                    "_id": "660e595ee65856861ee7919b",
+                    "game_id": 3433437,
+                    "competition_id": "IT1",
+                    "season": 2020,
+                    "round": "26. Matchday",
+                    "date": "2021-03-07T00:00:00.000Z",
+                    "home_club_id": 6195,
+                    "away_club_id": 1025,
+                    "home_club_goals": 3,
+                    "away_club_goals": 1,
+                    "home_club_position": 6,
+                    "away_club_position": 12,
+                    "home_club_manager_name": "Gennaro Gattuso",
+                    "away_club_manager_name": "Siniša Mihajlović",
+                    "stadium": "Stadio Diego Armando Maradona",
+                    "referee": "Daniele Chiffi",
+                    "url": "https://www.transfermarkt.co.uk/ssc-napoli_bologna-fc-1909/index/spielbericht/3433437",
+                    "home_club_name": "Società Sportiva Calcio Napoli",
+                    "away_club_name": "Bologna Football Club 1909",
+                    "aggregate": "3:1",
+                    "competition_type": "domestic_league"
+                  },
+                  {
+                    "_id": "660e595fe65856861ee7a1b8",
+                    "game_id": 3433435,
+                    "competition_id": "IT1",
+                    "season": 2020,
+                    "round": "26. Matchday",
+                    "date": "2021-03-08T00:00:00.000Z",
+                    "home_club_id": 46,
+                    "away_club_id": 800,
+                    "home_club_goals": 1,
+                    "away_club_goals": 0,
+                    "home_club_position": 1,
+                    "away_club_position": 5,
+                    "home_club_manager_name": "Antonio Conte",
+                    "away_club_manager_name": "Gian Piero Gasperini",
+                    "stadium": "Giuseppe Meazza",
+                    "referee": "Maurizio Mariani",
+                    "url": "https://www.transfermarkt.co.uk/inter-milan_atalanta-bc/index/spielbericht/3433435",
+                    "home_club_name": "Football Club Internazionale Milano S.p.A.",
+                    "away_club_name": "Atalanta Bergamasca Calcio S.p.a.",
+                    "aggregate": "1:0",
+                    "competition_type": "domestic_league"
+                  },
+                  {
+                    "_id": "660e5960e65856861ee7b035",
+                    "game_id": 3433439,
+                    "competition_id": "IT1",
+                    "season": 2020,
+                    "round": "26. Matchday",
+                    "date": "2021-03-07T00:00:00.000Z",
+                    "home_club_id": 12,
+                    "away_club_id": 252,
+                    "home_club_goals": 1,
+                    "away_club_goals": 0,
+                    "home_club_position": 4,
+                    "away_club_position": 13,
+                    "home_club_manager_name": "Paulo Fonseca",
+                    "away_club_manager_name": "Davide Ballardini",
+                    "stadium": "Olimpico di Roma",
+                    "referee": "Michael Fabbri",
+                    "url": "https://www.transfermarkt.co.uk/as-roma_genoa-cfc/index/spielbericht/3433439",
+                    "home_club_name": "Associazione Sportiva Roma",
+                    "away_club_name": "Genoa Cricket and Football Club",
+                    "aggregate": "1:0",
+                    "competition_type": "domestic_league"
+                  },
+                  {
+                    "_id": "660e5960e65856861ee7beb3",
+                    "game_id": 3433438,
+                    "competition_id": "IT1",
+                    "season": 2020,
+                    "round": "26. Matchday",
+                    "date": "2021-03-07T00:00:00.000Z",
+                    "home_club_id": 1038,
+                    "away_club_id": 1390,
+                    "home_club_goals": 2,
+                    "away_club_goals": 2,
+                    "home_club_position": 10,
+                    "away_club_position": 18,
+                    "home_club_manager_name": "Claudio Ranieri",
+                    "away_club_manager_name": "Leonardo Semplici",
+                    "stadium": "Luigi Ferraris",
+                    "referee": "Piero Giacomelli",
+                    "url": "https://www.transfermarkt.co.uk/uc-sampdoria_cagliari-calcio/index/spielbericht/3433438",
+                    "home_club_name": "UC Sampdoria",
+                    "away_club_name": "Cagliari Calcio",
+                    "aggregate": "2:2",
+                    "competition_type": "domestic_league"
+                  },
+                  {
+                    "_id": "660e5960e65856861ee7beb4",
+                    "game_id": 3433444,
+                    "competition_id": "IT1",
+                    "season": 2020,
+                    "round": "26. Matchday",
+                    "date": "2021-03-07T00:00:00.000Z",
+                    "home_club_id": 4083,
+                    "away_club_id": 416,
+                    "home_club_goals": 4,
+                    "away_club_goals": 2,
+                    "home_club_position": 20,
+                    "away_club_position": 17,
+                    "home_club_manager_name": "Serse Cosmi",
+                    "away_club_manager_name": "Davide Nicola",
+                    "stadium": "Ezio Scida",
+                    "referee": "Marco Guida",
+                    "url": "https://www.transfermarkt.co.uk/fc-crotone_torino-fc/index/spielbericht/3433444",
+                    "home_club_name": "FC Crotone",
+                    "away_club_name": "Torino Calcio",
+                    "aggregate": "4:2",
+                    "competition_type": "domestic_league"
+                  },
+                  {
+                    "_id": "660e5961e65856861ee7d0f5",
+                    "game_id": 3433443,
+                    "competition_id": "IT1",
+                    "season": 2020,
+                    "round": "26. Matchday",
+                    "date": "2021-03-06T00:00:00.000Z",
+                    "home_club_id": 410,
+                    "away_club_id": 6574,
+                    "home_club_goals": 2,
+                    "away_club_goals": 0,
+                    "home_club_position": 11,
+                    "away_club_position": 9,
+                    "home_club_manager_name": "Luca Gotti",
+                    "away_club_manager_name": "Roberto De Zerbi",
+                    "stadium": "Dacia Arena",
+                    "referee": "Lorenzo Maggioni",
+                    "url": "https://www.transfermarkt.co.uk/udinese-calcio_us-sassuolo/index/spielbericht/3433443",
+                    "home_club_name": "Udinese Calcio",
+                    "away_club_name": "Unione Sportiva Sassuolo Calcio",
+                    "aggregate": "2:0",
+                    "competition_type": "domestic_league"
+                  },
+                  {
+                    "_id": "660e5964e65856861ee8294f",
+                    "game_id": 3433436,
+                    "competition_id": "IT1",
+                    "season": 2020,
+                    "round": "26. Matchday",
+                    "date": "2021-03-06T00:00:00.000Z",
+                    "home_club_id": 3522,
+                    "away_club_id": 4171,
+                    "home_club_goals": 1,
+                    "away_club_goals": 1,
+                    "home_club_position": 14,
+                    "away_club_position": 16,
+                    "home_club_manager_name": "Vincenzo Italiano",
+                    "away_club_manager_name": "Filippo Inzaghi",
+                    "stadium": "Alberto Picco",
+                    "referee": "Francesco Fourneau",
+                    "url": "https://www.transfermarkt.co.uk/spezia-calcio_benevento-calcio/index/spielbericht/3433436",
+                    "home_club_name": "Spezia Calcio",
+                    "away_club_name": "Benevento Calcio",
+                    "aggregate": "1:1",
+                    "competition_type": "domestic_league"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No games found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No games found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getPlayerStatsDB": {
+      "get": {
+        "summary": "Get player stats for a specific player",
+        "servers": [
+          {
+            "url": "http://localhost:3001"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "playerId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": 371998
+            },
+            "description": "Player ID to query stats"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Player stats",
+            "content": {
+              "application/json": {
+                "example": {
+                  "playerId": "371998",
+                  "total_yellow_cards": 2,
+                  "total_red_cards": 0,
+                  "total_goals": 6,
+                  "total_minutes_played": 975
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No player found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No player found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+#gameTimeline {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.timeline-wrapper {
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.timeline {
+    position: relative;
+    padding: 0;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    list-style: none;
+}
+
+.timeline-item {
+    position: relative;
+    padding: 15px 10px; /* Adjust padding as necessary */
+    display: flex;
+    justify-content: center;
+}
+
+
+.timeline-left .timeline-panel {
+    position: relative;
+    margin-right: auto;
+    margin-left: 0;
+    text-align: right;
+}
+
+.timeline-right .timeline-panel {
+    position: relative;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+
+.timeline-panel {
+    background-color: #1f1f1f;
+    border: none;
+    position: relative;
+    z-index: 2;
+    width: calc(100% - 35px);
+    max-width: 350px; /* Example: Set a maximum width if needed */
+}
+
+.timeline-item::before {
+    content: attr(data-minute);
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    background-color: #333;
+    border-radius: 50%;
+    padding: 5px;
+    z-index: 1;
+    font-size: 0.8em;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 100%;
+    background-color: #333;
+    z-index: 0;
+}
+
+
+.timeline-left .timeline-panel::before,
+.timeline-right .timeline-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background-color: #333;
+    z-index: -1;
+}
+
+.timeline-left .timeline-panel::before {
+    left: -15px;
+}
+
+.timeline-right .timeline-panel::before {
+    right: -15px;
+}
+
+.timeline-left .timeline-panel .timeline-heading {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.timeline-right .timeline-panel .timeline-heading {
+    display: flex;
+    justify-content: flex-start;
+}

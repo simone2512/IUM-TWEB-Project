@@ -1,0 +1,2429 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Football Statics",
+    "description": "Football Competitions Data API",
+    "version": "1.0.0",
+    "x-contacts": [
+      {
+        "name": "Jacopo Malpesi",
+        "email": "jacopo.malpesi@edu.unito.it"
+      },
+      {
+        "name": "Simone Tantillo",
+        "email": "simone.tantillo@edu.unito.it"
+      },
+      {
+        "name": "Giuseppe Raso",
+        "email": "giuseppe.raso@edu.unito.it"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Main Express server"
+    }
+  ],
+  "paths": {
+    "/competitions/getAllCompetitions": {
+      "get": {
+        "summary": "Retrieve a list of all competitions",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all competitions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "competitions": [
+                    {
+                      "competitionId": "CIT",
+                      "competitionCode": "italy-cup",
+                      "name": "italy-cup",
+                      "subType": "domestic_cup",
+                      "type": "domestic_cup",
+                      "countryId": 75,
+                      "countryName": "Italy",
+                      "domesticLeagueCode": "IT1",
+                      "confederation": "europa",
+                      "url": "https://www.transfermarkt.co.uk/italy-cup/startseite/wettbewerb/CIT"
+                    },
+                    {
+                      "competitionId": "GRP",
+                      "competitionCode": "kypello-elladas",
+                      "name": "kypello-elladas",
+                      "subType": "domestic_cup",
+                      "type": "domestic_cup",
+                      "countryId": 56,
+                      "countryName": "Greece",
+                      "domesticLeagueCode": "GR1",
+                      "confederation": "europa",
+                      "url": "https://www.transfermarkt.co.uk/kypello-elladas/startseite/wettbewerb/GRP"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No competitions found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/competitions/getAllDomesticCompetitions": {
+      "get": {
+        "summary": "Retrieve a list of all domestic competitions",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all domestic competitions",
+            "content": {
+              "application/json": {
+                "example": {
+                  "domesticCompetitions": [
+                    {
+                      "competitionId": "ES1",
+                      "competitionCode": "laliga",
+                      "name": "laliga",
+                      "subType": "first_tier",
+                      "type": "domestic_league",
+                      "countryId": 157,
+                      "countryName": "Spain",
+                      "domesticLeagueCode": "ES1",
+                      "confederation": "europa",
+                      "url": "https://www.transfermarkt.co.uk/laliga/startseite/wettbewerb/ES1"
+                    },
+                    {
+                      "competitionId": "FR1",
+                      "competitionCode": "ligue-1",
+                      "name": "ligue-1",
+                      "subType": "first_tier",
+                      "type": "domestic_league",
+                      "countryId": 50,
+                      "countryName": "France",
+                      "domesticLeagueCode": "FR1",
+                      "confederation": "europa",
+                      "url": "https://www.transfermarkt.co.uk/ligue-1/startseite/wettbewerb/FR1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No domestic competitions found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/competitionSelected/getInfoCompetitionSelected": {
+      "get": {
+        "summary": "Retrieve information about a selected competition",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "The ID of the competition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Information about the selected competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "IT1,serie-a,serie-a,first_tier,domestic_league,75,Italy,IT1,europa,https://www.transfermarkt.co.uk/serie-a/startseite/wettbewerb/IT1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No competition found with the provided ID"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/competitionSelected/getLeadboardMongo": {
+      "get": {
+        "summary": "Retrieve the leaderboard for a selected competition",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "The ID of the competition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Leaderboard for the selected competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "nome": {
+                        "type": "string"
+                      },
+                      "punti": {
+                        "type": "integer"
+                      },
+                      "partiteGiocate": {
+                        "type": "integer"
+                      },
+                      "vittorie": {
+                        "type": "integer"
+                      },
+                      "pareggi": {
+                        "type": "integer"
+                      },
+                      "sconfitte": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "_id": "Football Club Internazionale Milano S.p.A.",
+                      "nome": "Football Club Internazionale Milano S.p.A.",
+                      "punti": 32,
+                      "partiteGiocate": 13,
+                      "vittorie": 10,
+                      "pareggi": 2,
+                      "sconfitte": 1
+                    },
+                    {
+                      "_id": "Juventus Football Club",
+                      "nome": "Juventus Football Club",
+                      "punti": 30,
+                      "partiteGiocate": 13,
+                      "vittorie": 9,
+                      "pareggi": 3,
+                      "sconfitte": 1
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No leaderboard data found for the provided competition ID"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/competitionSelected/getRollOfHonourMongo": {
+      "get": {
+        "summary": "Retrieve the roll of honour for a selected competition",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "CIT"
+            },
+            "description": "The ID of the competition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Roll of honour for the selected competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "season": {
+                        "type": "integer"
+                      },
+                      "winner_id": {
+                        "type": "integer"
+                      },
+                      "winner": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "season": 2012,
+                      "winner_id": 398,
+                      "winner": "Società Sportiva Lazio S.p.A."
+                    },
+                    {
+                      "season": 2013,
+                      "winner_id": 61965,
+                      "winner": "Società Sportiva Calcio Napoli"
+                    },
+                    {
+                      "season": 2014,
+                      "winner_id": 506,
+                      "winner": "Juventus Football Club"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "No roll of honour data found for the provided competition ID"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/games/getAllSeasonOfCompetitionMongo": {
+      "get": {
+        "summary": "Retrieve all seasons for a competition",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "The ID of the competition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All seasons for the competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "example": 2023
+                  },
+                  "example": [
+                    2023,
+                    2022,
+                    2021,
+                    2020,
+                    2019,
+                    2018,
+                    2017,
+                    2016,
+                    2015,
+                    2014,
+                    2013,
+                    2012
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/games/getRoundsOfSeasonMongo": {
+      "get": {
+        "summary": "Retrieve all rounds for a season of a competition",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "The ID of the competition"
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2020
+            },
+            "description": "The season of the competition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All rounds for the season of the competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "1. Matchday"
+                  },
+                  "example": [
+                    "1. Matchday",
+                    "2. Matchday",
+                    "3. Matchday",
+                    "4. Matchday",
+                    "5. Matchday",
+                    "6. Matchday",
+                    "7. Matchday",
+                    "8. Matchday",
+                    "9. Matchday",
+                    "10. Matchday",
+                    "11. Matchday",
+                    "12. Matchday",
+                    "13. Matchday",
+                    "14. Matchday",
+                    "15. Matchday",
+                    "16. Matchday",
+                    "17. Matchday",
+                    "18. Matchday",
+                    "19. Matchday",
+                    "20. Matchday",
+                    "21. Matchday",
+                    "22. Matchday",
+                    "23. Matchday",
+                    "24. Matchday",
+                    "25. Matchday",
+                    "26. Matchday",
+                    "27. Matchday",
+                    "28. Matchday",
+                    "29. Matchday",
+                    "30. Matchday",
+                    "31. Matchday",
+                    "32. Matchday",
+                    "33. Matchday",
+                    "34. Matchday",
+                    "35. Matchday",
+                    "36. Matchday",
+                    "37. Matchday",
+                    "38. Matchday"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/games/getGamesOfRoundOfSeasonMongo": {
+      "get": {
+        "summary": "Retrieve all games for a round of a season of a competition",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            },
+            "description": "The ID of the competition"
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2020
+            },
+            "description": "The season of the competition"
+          },
+          {
+            "name": "round",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6. Matchday"
+            },
+            "description": "The round of the season"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All games for the round of the season of the competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "662131f89a96b6774126a525"
+                      },
+                      "game_id": {
+                        "type": "integer",
+                        "example": 3433236
+                      },
+                      "competition_id": {
+                        "type": "string",
+                        "example": "IT1"
+                      },
+                      "season": {
+                        "type": "integer",
+                        "example": 2020
+                      },
+                      "round": {
+                        "type": "string",
+                        "example": "6. Matchday"
+                      },
+                      "date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2020-10-31T00:00:00.000Z"
+                      },
+                      "home_club_id": {
+                        "type": "integer",
+                        "example": 4083
+                      },
+                      "away_club_id": {
+                        "type": "integer",
+                        "example": 800
+                      },
+                      "home_club_goals": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "away_club_goals": {
+                        "type": "integer",
+                        "example": 2
+                      },
+                      "home_club_position": {
+                        "type": "integer",
+                        "example": 20
+                      },
+                      "away_club_position": {
+                        "type": "integer",
+                        "example": 5
+                      },
+                      "home_club_manager_name": {
+                        "type": "string",
+                        "example": "Giovanni Stroppa"
+                      },
+                      "away_club_manager_name": {
+                        "type": "string",
+                        "example": "Gian Piero Gasperini"
+                      },
+                      "stadium": {
+                        "type": "string",
+                        "example": "Ezio Scida"
+                      },
+                      "referee": {
+                        "type": "string",
+                        "example": "Federico Dionisi"
+                      },
+                      "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "example": "https://www.transfermarkt.co.uk/fc-crotone_atalanta-bc/index/spielbericht/3433236"
+                      },
+                      "home_club_name": {
+                        "type": "string",
+                        "example": "FC Crotone"
+                      },
+                      "away_club_name": {
+                        "type": "string",
+                        "example": "Atalanta Bergamasca Calcio S.p.a."
+                      },
+                      "aggregate": {
+                        "type": "string",
+                        "example": "1:2"
+                      },
+                      "competition_type": {
+                        "type": "string",
+                        "example": "domestic_league"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "_id": "662131f89a96b6774126a525",
+                    "game_id": 3433236,
+                    "competition_id": "IT1",
+                    "season": 2020,
+                    "round": "6. Matchday",
+                    "date": "2020-10-31T00:00:00.000Z",
+                    "home_club_id": 4083,
+                    "away_club_id": 800,
+                    "home_club_goals": 1,
+                    "away_club_goals": 2,
+                    "home_club_position": 20,
+                    "away_club_position": 5,
+                    "home_club_manager_name": "Giovanni Stroppa",
+                    "away_club_manager_name": "Gian Piero Gasperini",
+                    "stadium": "Ezio Scida",
+                    "referee": "Federico Dionisi",
+                    "url": "https://www.transfermarkt.co.uk/fc-crotone_atalanta-bc/index/spielbericht/3433236",
+                    "home_club_name": "FC Crotone",
+                    "away_club_name": "Atalanta Bergamasca Calcio S.p.a.",
+                    "aggregate": "1:2",
+                    "competition_type": "domestic_league"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/gameSelected/getInfoGameMongo": {
+      "get": {
+        "summary": "Retrieve information for a specific game",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2222597
+            },
+            "description": "The ID of the game"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Information about the game",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "game_id": {
+                      "type": "integer",
+                      "example": 2222597
+                    },
+                    "competition_id": {
+                      "type": "string",
+                      "example": "RU1"
+                    },
+                    "round": {
+                      "type": "string",
+                      "example": "6. Matchday"
+                    },
+                    "date": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2012-08-25T00:00:00.000Z"
+                    },
+                    "home_club_id": {
+                      "type": "integer",
+                      "example": 3725
+                    },
+                    "away_club_id": {
+                      "type": "integer",
+                      "example": 232
+                    },
+                    "home_club_goals": {
+                      "type": "integer",
+                      "example": 2
+                    },
+                    "away_club_goals": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "stadium": {
+                      "type": "string",
+                      "example": "Akhmat-Arena"
+                    },
+                    "attendance": {
+                      "type": "integer",
+                      "example": 21700
+                    },
+                    "referee": {
+                      "type": "string",
+                      "example": "Vladislav Bezborodov"
+                    },
+                    "home_club_name": {
+                      "type": "string",
+                      "example": "RFK Akhmat Grozny"
+                    },
+                    "away_club_name": {
+                      "type": "string",
+                      "example": "FK Spartak Moskva"
+                    }
+                  }
+                },
+                "example": {
+                  "game_id": 2222597,
+                  "competition_id": "RU1",
+                  "round": "6. Matchday",
+                  "date": "2012-08-25T00:00:00.000Z",
+                  "home_club_id": 3725,
+                  "away_club_id": 232,
+                  "home_club_goals": 2,
+                  "away_club_goals": 1,
+                  "stadium": "Akhmat-Arena",
+                  "attendance": 21700,
+                  "referee": "Vladislav Bezborodov",
+                  "home_club_name": "RFK Akhmat Grozny",
+                  "away_club_name": "FK Spartak Moskva"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/gameSelected/getInfoGameEventMongo": {
+      "get": {
+        "summary": "Retrieve event information for a specific game",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2222597
+            },
+            "description": "The ID of the game"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event information about the game",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "662131a59a96b677411aa19b"
+                      },
+                      "game_id": {
+                        "type": "integer",
+                        "example": 2222597
+                      },
+                      "minute": {
+                        "type": "integer",
+                        "example": 80
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "Goals"
+                      },
+                      "club_id": {
+                        "type": "integer",
+                        "example": 3725
+                      },
+                      "player_id": {
+                        "type": "integer",
+                        "example": 15102
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": ", Right-footed shot, 3. Goal of the Season Assist: , Pass, 1. Assist of the Season"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "_id": "662131a59a96b677411aa19b",
+                    "game_id": 2222597,
+                    "minute": 80,
+                    "type": "Goals",
+                    "club_id": 3725,
+                    "player_id": 15102,
+                    "description": ", Right-footed shot, 3. Goal of the Season Assist: , Pass, 1. Assist of the Season"
+                  },
+                  {
+                    "_id": "662131a59a96b677411aa19c",
+                    "game_id": 2222597,
+                    "minute": 40,
+                    "type": "Cards",
+                    "club_id": 232,
+                    "player_id": 19087,
+                    "description": "3. Yellow card  , Professional foul"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/gameSelected/getPlayerNameById": {
+      "get": {
+        "summary": "Retrieve player name by ID",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "player_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 5925
+            },
+            "description": "The ID of the player"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Player name",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "player_name": {
+                      "type": "string",
+                      "example": "Nicola Legrottaglie"
+                    }
+                  }
+                },
+                "example": {
+                  "player_name": "Nicola Legrottaglie"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/getBestPlayers": {
+      "get": {
+        "summary": "Retrieve a list of the best players",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of best players",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "playerId": {
+                        "type": "integer",
+                        "example": 342229
+                      },
+                      "firstName": {
+                        "type": "string",
+                        "example": "Kylian"
+                      },
+                      "lastName": {
+                        "type": "string",
+                        "example": "Mbappé"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Kylian Mbappé"
+                      },
+                      "lastSeason": {
+                        "type": "integer",
+                        "example": 2023
+                      },
+                      "currentClubId": {
+                        "type": "integer",
+                        "example": 583
+                      },
+                      "playerCode": {
+                        "type": "string",
+                        "example": "kylian-mbappe"
+                      },
+                      "countryOfBirth": {
+                        "type": "string",
+                        "example": "France"
+                      },
+                      "cityOfBirth": {
+                        "type": "string",
+                        "example": "Paris"
+                      },
+                      "countryOfCitizenship": {
+                        "type": "string",
+                        "example": "France"
+                      },
+                      "dateOfBirth": {
+                        "type": "string",
+                        "example": "1998-12-20"
+                      },
+                      "subPosition": {
+                        "type": "string",
+                        "example": "Centre-Forward"
+                      },
+                      "position": {
+                        "type": "string",
+                        "example": "Attack"
+                      },
+                      "foot": {
+                        "type": "string",
+                        "example": "right"
+                      },
+                      "heightInCm": {
+                        "type": "integer",
+                        "example": 178
+                      },
+                      "marketValueInEur": {
+                        "type": "integer",
+                        "example": 180000000
+                      },
+                      "highestMarketValueInEur": {
+                        "type": "integer",
+                        "example": 200000000
+                      },
+                      "contractExpirationDate": {
+                        "type": "string",
+                        "example": "2024-06-30"
+                      },
+                      "agentName": {
+                        "type": "string",
+                        "example": null
+                      },
+                      "imageUrl": {
+                        "type": "string",
+                        "example": "https://img.a.transfermarkt.technology/portrait/header/342229-1682683695.jpg?lm=1"
+                      },
+                      "url": {
+                        "type": "string",
+                        "example": "https://www.transfermarkt.co.uk/kylian-mbappe/profil/spieler/342229"
+                      },
+                      "currentClubDomesticCompetitionId": {
+                        "type": "string",
+                        "example": "FR1"
+                      },
+                      "currentClubName": {
+                        "type": "string",
+                        "example": "Paris Saint-Germain"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "playerId": 342229,
+                    "firstName": "Kylian",
+                    "lastName": "Mbappé",
+                    "name": "Kylian Mbappé",
+                    "lastSeason": 2023,
+                    "currentClubId": 583,
+                    "playerCode": "kylian-mbappe",
+                    "countryOfBirth": "France",
+                    "cityOfBirth": "Paris",
+                    "countryOfCitizenship": "France",
+                    "dateOfBirth": "1998-12-20",
+                    "subPosition": "Centre-Forward",
+                    "position": "Attack",
+                    "foot": "right",
+                    "heightInCm": 178,
+                    "marketValueInEur": 180000000,
+                    "highestMarketValueInEur": 200000000,
+                    "contractExpirationDate": "2024-06-30",
+                    "agentName": null,
+                    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/342229-1682683695.jpg?lm=1",
+                    "url": "https://www.transfermarkt.co.uk/kylian-mbappe/profil/spieler/342229",
+                    "currentClubDomesticCompetitionId": "FR1",
+                    "currentClubName": "Paris Saint-Germain"
+                  },
+                  {
+                    "playerId": 418560,
+                    "firstName": "Erling",
+                    "lastName": "Haaland",
+                    "name": "Erling Haaland",
+                    "lastSeason": 2023,
+                    "currentClubId": 281,
+                    "playerCode": "erling-haaland",
+                    "countryOfBirth": "England",
+                    "cityOfBirth": "Leeds",
+                    "countryOfCitizenship": "Norway",
+                    "dateOfBirth": "2000-07-21",
+                    "subPosition": "Centre-Forward",
+                    "position": "Attack",
+                    "foot": "left",
+                    "heightInCm": 195,
+                    "marketValueInEur": 180000000,
+                    "highestMarketValueInEur": 180000000,
+                    "contractExpirationDate": "2027-06-30",
+                    "agentName": "Rafaela Pimenta",
+                    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/418560-1694590614.jpg?lm=1",
+                    "url": "https://www.transfermarkt.co.uk/erling-haaland/profil/spieler/418560",
+                    "currentClubDomesticCompetitionId": "GB1",
+                    "currentClubName": "Manchester City"
+                  },
+                  {
+                    "playerId": 371998,
+                    "firstName": null,
+                    "lastName": "Vinicius Junior",
+                    "name": "Vinicius Junior",
+                    "lastSeason": 2023,
+                    "currentClubId": 418,
+                    "playerCode": "vinicius-junior",
+                    "countryOfBirth": "Brazil",
+                    "cityOfBirth": "São Gonçalo",
+                    "countryOfCitizenship": "Brazil",
+                    "dateOfBirth": "2000-07-12",
+                    "subPosition": "Left Winger",
+                    "position": "Attack",
+                    "foot": "right",
+                    "heightInCm": 176,
+                    "marketValueInEur": 150000000,
+                    "highestMarketValueInEur": 150000000,
+                    "contractExpirationDate": null,
+                    "agentName": "TFM Agency",
+                    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/371998-1664869583.jpg?lm=1",
+                    "url": "https://www.transfermarkt.co.uk/vinicius-junior/profil/spieler/371998",
+                    "currentClubDomesticCompetitionId": "ES1",
+                    "currentClubName": "Real Madrid"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/getBestClubs": {
+      "get": {
+        "summary": "Retrieve a list of the best clubs",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of best clubs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "clubId": {
+                        "type": "integer",
+                        "example": 281
+                      },
+                      "clubCode": {
+                        "type": "string",
+                        "example": "manchester-city"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Manchester City Football Club"
+                      },
+                      "domesticCompetitionId": {
+                        "type": "string",
+                        "example": "GB1"
+                      },
+                      "squadSize": {
+                        "type": "integer",
+                        "example": 24
+                      },
+                      "averageAge": {
+                        "type": "number",
+                        "example": 27.2
+                      },
+                      "foreignersNumber": {
+                        "type": "integer",
+                        "example": 17
+                      },
+                      "foreignersPercentage": {
+                        "type": "number",
+                        "example": 70.8
+                      },
+                      "nationalTeamPlayers": {
+                        "type": "integer",
+                        "example": 21
+                      },
+                      "stadiumName": {
+                        "type": "string",
+                        "example": "Etihad Stadium"
+                      },
+                      "stadiumSeats": {
+                        "type": "integer",
+                        "example": 55017
+                      },
+                      "netTransferRecord": {
+                        "type": "string",
+                        "example": "€-126.60m"
+                      },
+                      "lastSeason": {
+                        "type": "integer",
+                        "example": 2023
+                      },
+                      "url": {
+                        "type": "string",
+                        "example": "https://www.transfermarkt.co.uk/manchester-city/startseite/verein/281"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "clubId": 281,
+                    "clubCode": "manchester-city",
+                    "name": "Manchester City Football Club",
+                    "domesticCompetitionId": "GB1",
+                    "squadSize": 24,
+                    "averageAge": 27.2,
+                    "foreignersNumber": 17,
+                    "foreignersPercentage": 70.8,
+                    "nationalTeamPlayers": 21,
+                    "stadiumName": "Etihad Stadium",
+                    "stadiumSeats": 55017,
+                    "netTransferRecord": "€-126.60m",
+                    "lastSeason": 2023,
+                    "url": "https://www.transfermarkt.co.uk/manchester-city/startseite/verein/281"
+                  },
+                  {
+                    "clubId": 583,
+                    "clubCode": "fc-paris-saint-germain",
+                    "name": "Paris Saint-Germain Football Club",
+                    "domesticCompetitionId": "FR1",
+                    "squadSize": 29,
+                    "averageAge": 25.7,
+                    "foreignersNumber": 17,
+                    "foreignersPercentage": 58.6,
+                    "nationalTeamPlayers": 19,
+                    "stadiumName": "Parc des Princes",
+                    "stadiumSeats": 49691,
+                    "netTransferRecord": "€-146.50m",
+                    "lastSeason": 2023,
+                    "url": "https://www.transfermarkt.co.uk/fc-paris-saint-germain/startseite/verein/583"
+                  },
+                  {
+                    "clubId": 11,
+                    "clubCode": "fc-arsenal",
+                    "name": "Arsenal Football Club",
+                    "domesticCompetitionId": "GB1",
+                    "squadSize": 25,
+                    "averageAge": 25.8,
+                    "foreignersNumber": 18,
+                    "foreignersPercentage": 72,
+                    "nationalTeamPlayers": 20,
+                    "stadiumName": "Emirates Stadium",
+                    "stadiumSeats": 60704,
+                    "netTransferRecord": "€-167.04m",
+                    "lastSeason": 2023,
+                    "url": "https://www.transfermarkt.co.uk/fc-arsenal/startseite/verein/11"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/getBestCompetitions": {
+      "get": {
+        "summary": "Retrieve a list of the best competitions",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of best competitions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "competitionId": {
+                        "type": "string",
+                        "example": "GB1"
+                      },
+                      "competitionCode": {
+                        "type": "string",
+                        "example": "premier-league"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Premier League"
+                      },
+                      "subType": {
+                        "type": "string",
+                        "example": "first_tier"
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "domestic_league"
+                      },
+                      "countryId": {
+                        "type": "integer",
+                        "example": 189
+                      },
+                      "countryName": {
+                        "type": "string",
+                        "example": "England"
+                      },
+                      "domesticLeagueCode": {
+                        "type": "string",
+                        "example": "GB1"
+                      },
+                      "confederation": {
+                        "type": "string",
+                        "example": "europa"
+                      },
+                      "url": {
+                        "type": "string",
+                        "example": "https://www.transfermarkt.co.uk/premier-league/startseite/wettbewerb/GB1"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "competitionId": "GB1",
+                    "competitionCode": "premier-league",
+                    "name": "Premier League",
+                    "subType": "first_tier",
+                    "type": "domestic_league",
+                    "countryId": 189,
+                    "countryName": "England",
+                    "domesticLeagueCode": "GB1",
+                    "confederation": "europa",
+                    "url": "https://www.transfermarkt.co.uk/premier-league/startseite/wettbewerb/GB1"
+                  },
+                  {
+                    "competitionId": "IT1",
+                    "competitionCode": "serie-a",
+                    "name": "Serie A",
+                    "subType": "first_tier",
+                    "type": "domestic_league",
+                    "countryId": 75,
+                    "countryName": "Italy",
+                    "domesticLeagueCode": "IT1",
+                    "confederation": "europa",
+                    "url": "https://www.transfermarkt.co.uk/serie-a/startseite/wettbewerb/IT1"
+                  },
+                  {
+                    "competitionId": "ES1",
+                    "competitionCode": "laliga",
+                    "name": "La Liga",
+                    "subType": "first_tier",
+                    "type": "domestic_league",
+                    "countryId": 157,
+                    "countryName": "Spain",
+                    "domesticLeagueCode": "ES1",
+                    "confederation": "europa",
+                    "url": "https://www.transfermarkt.co.uk/laliga/startseite/wettbewerb/ES1"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/getClubValue": {
+      "get": {
+        "summary": "Retrieve the market value of a club",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "clubId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 11
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The market value of the club",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "example": 1127100000
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/getCompetitionValue": {
+      "get": {
+        "summary": "Retrieve the market value of a competition",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The market value of the competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "example": 5745310000
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/players/getAllCountries": {
+      "get": {
+        "summary": "Retrieve all countries",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all countries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": [
+                      "Afghanistan",
+                      "Albania",
+                      "Algeria",
+                      "Andorra",
+                      "Angola",
+                      "Antigua and Barbuda",
+                      "Argentina",
+                      "Armenia",
+                      "Aruba",
+                      "Australia",
+                      "Austria",
+                      "Azerbaijan",
+                      "Bahrain",
+                      "Barbados",
+                      "Belarus",
+                      "Belgium",
+                      "Benin",
+                      "Bermuda",
+                      "Bolivia",
+                      "Bosnia-Herzegovina",
+                      "Brazil",
+                      "Brunei Darussalam",
+                      "Bulgaria",
+                      "Burkina Faso",
+                      "Burundi",
+                      "Cameroon",
+                      "Canada",
+                      "Cape Verde",
+                      "Central African Republic",
+                      "Chad",
+                      "Chile",
+                      "China",
+                      "Chinese Taipei",
+                      "Colombia",
+                      "Comoros",
+                      "Congo",
+                      "Costa Rica",
+                      "Cote d'Ivoire",
+                      "Croatia",
+                      "Cuba",
+                      "Curacao",
+                      "Cyprus",
+                      "Czech Republic",
+                      "DR Congo",
+                      "Denmark",
+                      "Dominican Republic",
+                      "Ecuador",
+                      "Egypt",
+                      "El Salvador",
+                      "England",
+                      "Equatorial Guinea",
+                      "Eritrea",
+                      "Estonia",
+                      "Ethiopia",
+                      "Faroe Islands",
+                      "Finland",
+                      "France",
+                      "French Guiana",
+                      "Gabon",
+                      "Georgia",
+                      "Germany",
+                      "Ghana",
+                      "Greece",
+                      "Grenada",
+                      "Guadeloupe",
+                      "Guatemala",
+                      "Guinea",
+                      "Guinea-Bissau",
+                      "Guyana",
+                      "Haiti",
+                      "Honduras",
+                      "Hungary",
+                      "Iceland"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/players/getPlayersByFilter": {
+      "get": {
+        "summary": "Retrieve players filtered by various parameters",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "GB1"
+            },
+            "description": "The ID of the competition"
+          },
+          {
+            "name": "clubId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "example": 11
+            },
+            "description": "The ID of the club"
+          },
+          {
+            "name": "nationality",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Brazil"
+            },
+            "description": "The nationality of the player"
+          },
+          {
+            "name": "position",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Attack"
+            },
+            "description": "The position of the player"
+          },
+          {
+            "name": "subPosition",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Centre-Forward"
+            },
+            "description": "The sub-position of the player"
+          },
+          {
+            "name": "foot",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "right"
+            },
+            "description": "The preferred foot of the player"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "example": 0
+            },
+            "description": "The page number for pagination"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "example": 10
+            },
+            "description": "The number of items per page for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of players matching the filters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "content": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "playerId": {
+                            "type": "integer",
+                            "example": 363205
+                          },
+                          "firstName": {
+                            "type": "string",
+                            "example": null
+                          },
+                          "lastName": {
+                            "type": "string",
+                            "example": "Gabriel Jesus"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Gabriel Jesus"
+                          },
+                          "lastSeason": {
+                            "type": "integer",
+                            "example": 2023
+                          },
+                          "currentClubId": {
+                            "type": "integer",
+                            "example": 11
+                          },
+                          "playerCode": {
+                            "type": "string",
+                            "example": "gabriel-jesus"
+                          },
+                          "countryOfBirth": {
+                            "type": "string",
+                            "example": "Brazil"
+                          },
+                          "cityOfBirth": {
+                            "type": "string",
+                            "example": "São Paulo"
+                          },
+                          "countryOfCitizenship": {
+                            "type": "string",
+                            "example": "Brazil"
+                          },
+                          "dateOfBirth": {
+                            "type": "string",
+                            "example": "1997-04-03"
+                          },
+                          "subPosition": {
+                            "type": "string",
+                            "example": "Centre-Forward"
+                          },
+                          "position": {
+                            "type": "string",
+                            "example": "Attack"
+                          },
+                          "foot": {
+                            "type": "string",
+                            "example": "right"
+                          },
+                          "heightInCm": {
+                            "type": "integer",
+                            "example": 175
+                          },
+                          "marketValueInEur": {
+                            "type": "integer",
+                            "example": 75000000
+                          },
+                          "highestMarketValueInEur": {
+                            "type": "integer",
+                            "example": 80000000
+                          },
+                          "contractExpirationDate": {
+                            "type": "string",
+                            "example": "2027-06-30"
+                          },
+                          "agentName": {
+                            "type": "string",
+                            "example": "Energy Sports"
+                          },
+                          "imageUrl": {
+                            "type": "string",
+                            "example": "https://img.a.transfermarkt.technology/portrait/header/363205-1669711141.jpg?lm=1"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "https://www.transfermarkt.co.uk/gabriel-jesus/profil/spieler/363205"
+                          },
+                          "currentClubDomesticCompetitionId": {
+                            "type": "string",
+                            "example": "GB1"
+                          },
+                          "currentClubName": {
+                            "type": "string",
+                            "example": "Arsenal FC"
+                          }
+                        }
+                      }
+                    },
+                    "pageable": {
+                      "type": "object",
+                      "properties": {
+                        "pageNumber": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "pageSize": {
+                          "type": "integer",
+                          "example": 10
+                        },
+                        "sort": {
+                          "type": "object",
+                          "properties": {
+                            "empty": {
+                              "type": "boolean",
+                              "example": true
+                            },
+                            "sorted": {
+                              "type": "boolean",
+                              "example": false
+                            },
+                            "unsorted": {
+                              "type": "boolean",
+                              "example": true
+                            }
+                          }
+                        },
+                        "offset": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "paged": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "unpaged": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    },
+                    "last": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "totalPages": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "totalElements": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "size": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "number": {
+                      "type": "integer",
+                      "example": 0
+                    },
+                    "sort": {
+                      "type": "object",
+                      "properties": {
+                        "empty": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "sorted": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "unsorted": {
+                          "type": "boolean",
+                          "example": true
+                        }
+                      }
+                    },
+                    "first": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "numberOfElements": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "empty": {
+                      "type": "boolean",
+                      "example": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No players found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "No players found for the specified filters"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error while retrieving player data"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/playerSelected/getInfoPlayerSelected": {
+      "get": {
+        "summary": "Retrieve information about a selected player",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "player_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 18922
+            },
+            "description": "The ID of the player"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Player information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "playerId": {
+                      "type": "integer",
+                      "example": 18922
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "Karim"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Benzema"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Karim Benzema"
+                    },
+                    "lastSeason": {
+                      "type": "integer",
+                      "example": 2022
+                    },
+                    "currentClubId": {
+                      "type": "integer",
+                      "example": 418
+                    },
+                    "playerCode": {
+                      "type": "string",
+                      "example": "karim-benzema"
+                    },
+                    "countryOfBirth": {
+                      "type": "string",
+                      "example": "France"
+                    },
+                    "cityOfBirth": {
+                      "type": "string",
+                      "example": "Lyon"
+                    },
+                    "countryOfCitizenship": {
+                      "type": "string",
+                      "example": "France"
+                    },
+                    "dateOfBirth": {
+                      "type": "string",
+                      "example": "1987-12-19"
+                    },
+                    "subPosition": {
+                      "type": "string",
+                      "example": "Centre-Forward"
+                    },
+                    "position": {
+                      "type": "string",
+                      "example": "Attack"
+                    },
+                    "foot": {
+                      "type": "string",
+                      "example": "right"
+                    },
+                    "heightInCm": {
+                      "type": "integer",
+                      "example": 185
+                    },
+                    "marketValueInEur": {
+                      "type": "integer",
+                      "example": 25000000
+                    },
+                    "highestMarketValueInEur": {
+                      "type": "integer",
+                      "example": 60000000
+                    },
+                    "contractExpirationDate": {
+                      "type": "string",
+                      "example": "2026-06-30"
+                    },
+                    "agentName": {
+                      "type": "string",
+                      "example": null
+                    },
+                    "imageUrl": {
+                      "type": "string",
+                      "example": "https://img.a.transfermarkt.technology/portrait/header/18922-1653042225.jpg?lm=1"
+                    },
+                    "url": {
+                      "type": "string",
+                      "example": "https://www.transfermarkt.co.uk/karim-benzema/profil/spieler/18922"
+                    },
+                    "currentClubDomesticCompetitionId": {
+                      "type": "string",
+                      "example": "ES1"
+                    },
+                    "currentClubName": {
+                      "type": "string",
+                      "example": "Real Madrid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Player not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Player not found for the specified player_id"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error while retrieving player information"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/squads/getAllClubsCompetitionSelected": {
+      "get": {
+        "summary": "Retrieve all clubs in a selected competition",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "GB1"
+            },
+            "description": "ID of the competition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Clubs retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "clubId": {
+                        "type": "integer",
+                        "example": 281,
+                        "description": "ID of the club"
+                      },
+                      "clubName": {
+                        "type": "string",
+                        "example": "Manchester United",
+                        "description": "Name of the club"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No clubs found for the specified competition"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/squadSelected/getInfoClubSelected": {
+      "get": {
+        "summary": "Retrieve information about a selected club",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "clubId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 281
+            },
+            "description": "ID of the club"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Club information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 281
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Manchester City Football Club"
+                    },
+                    "shortName": {
+                      "type": "string",
+                      "example": "Manchester City"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "GB1"
+                    },
+                    "numPlayers": {
+                      "type": "integer",
+                      "example": 24
+                    },
+                    "averageAge": {
+                      "type": "number",
+                      "example": 27.2
+                    },
+                    "foreignPlayers": {
+                      "type": "integer",
+                      "example": 17
+                    },
+                    "averageMarketValue": {
+                      "type": "number",
+                      "example": 70.8
+                    },
+                    "stadiumName": {
+                      "type": "string",
+                      "example": "Etihad Stadium"
+                    },
+                    "stadiumCapacity": {
+                      "type": "integer",
+                      "example": 55017
+                    },
+                    "totalMarketValue": {
+                      "type": "string",
+                      "example": "€-126.60m"
+                    },
+                    "season": {
+                      "type": "integer",
+                      "example": 2023
+                    },
+                    "url": {
+                      "type": "string",
+                      "example": "https://www.transfermarkt.co.uk/manchester-city/startseite/verein/281"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Club not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Club not found for the specified clubId"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching club data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error while retrieving club information"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/squadSelected/getPlayerSquad": {
+      "get": {
+        "summary": "Retrieve players in a selected club's squad",
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "clubId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 281
+            },
+            "description": "ID of the club"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Players in squad retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "imageUrl": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": 418560,
+                      "name": "Erling Haaland",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/418560-1694590614.jpg?lm=1"
+                    },
+                    {
+                      "id": 406635,
+                      "name": "Phil Foden",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/406635-1668524492.jpg?lm=1"
+                    },
+                    {
+                      "id": 357565,
+                      "name": "Rodri",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/357565-1682587890.jpg?lm=1"
+                    },
+                    {
+                      "id": 241641,
+                      "name": "Bernardo Silva",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/241641-1684311533.jpg?lm=1"
+                    },
+                    {
+                      "id": 576024,
+                      "name": "Julián Álvarez",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/576024-1684920938.jpg?lm=1"
+                    },
+                    {
+                      "id": 475959,
+                      "name": "Josko Gvardiol",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/475959-1663685941.jpg?lm=1"
+                    },
+                    {
+                      "id": 258004,
+                      "name": "Rúben Dias",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/258004-1684921271.jpg?lm=1"
+                    },
+                    {
+                      "id": 203460,
+                      "name": "Jack Grealish",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/203460-1676499047.jpg?lm=1"
+                    },
+                    {
+                      "id": 88755,
+                      "name": "Kevin De Bruyne",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/88755-1684245748.jpg?lm=1"
+                    },
+                    {
+                      "id": 486049,
+                      "name": "Jérémy Doku",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/486049-1666699113.jpg?lm=1"
+                    },
+                    {
+                      "id": 601883,
+                      "name": "Matheus Nunes",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/601883-1693561106.jpg?lm=1"
+                    },
+                    {
+                      "id": 177476,
+                      "name": "Nathan Aké",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/177476-1666733797.jpg?lm=1"
+                    },
+                    {
+                      "id": 238223,
+                      "name": "Ederson",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/238223-1661978747.jpg?lm=1"
+                    },
+                    {
+                      "id": 186590,
+                      "name": "John Stones",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/186590-1684764261.jpg?lm=1"
+                    },
+                    {
+                      "id": 51471,
+                      "name": "Mateo Kovacic",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/51471-1682668192.jpg?lm=1"
+                    },
+                    {
+                      "id": 284730,
+                      "name": "Manuel Akanji",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/284730-1684165752.jpg?lm=1"
+                    },
+                    {
+                      "id": 351749,
+                      "name": "Kalvin Phillips",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/351749-1661978510.jpg?lm=1"
+                    },
+                    {
+                      "id": 701057,
+                      "name": "Rico Lewis",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/701057-1684856684.jpg?lm=1"
+                    },
+                    {
+                      "id": 95424,
+                      "name": "Kyle Walker",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/95424-1668090663.jpg?lm=1"
+                    },
+                    {
+                      "id": 366930,
+                      "name": "Sergio Gómez",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/366930-1660209686.jpg?lm=1"
+                    },
+                    {
+                      "id": 661207,
+                      "name": "Oscar Bobb",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/661207-1648828348.png?lm=1"
+                    },
+                    {
+                      "id": 85941,
+                      "name": "Stefan Ortega",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/85941-1668065114.jpg?lm=1"
+                    },
+                    {
+                      "id": 221624,
+                      "name": "Zack Steffen",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/221624-1665127241.jpg?lm=1"
+                    },
+                    {
+                      "id": 14555,
+                      "name": "Scott Carson",
+                      "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/14555-1666733622.jpg?lm=1"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Players not found for the specified club",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Players not found for the specified clubId"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching player data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error while retrieving player squad information"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

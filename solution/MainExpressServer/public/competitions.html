@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Competitions</title>
+  <!-- Viewport settings for responsive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- External CSS stylesheets -->
+  <link rel="stylesheet" href="/stylesheets/index.css">
+  <link rel="stylesheet" href="/stylesheets/players.css">
+
+  <!-- Bootstrap CSS framework -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap JavaScript bundle (including Popper.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+          crossorigin="anonymous"></script>
+
+  <!-- Popper.js library (required by Bootstrap) -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+          integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+          crossorigin="anonymous"></script>
+
+  <!-- jQuery library for DOM manipulation -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+  <!-- Axios library for making HTTP requests -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- Custom JavaScript file for competitions functionality -->
+  <script src="javascripts/competitions.js"></script>
+</head>
+
+<body onload="init()">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-light">
+  <div class="container">
+    <!-- Brand logo or name -->
+    <a class="navbar-brand">Football Statistics</a>
+    <!-- Navigation links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <!-- Home link -->
+        <li class="nav-item" id="navHome">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <!-- Players link -->
+        <li class="nav-item" id="navPlayers">
+          <a class="nav-link" href="players.html">Players</a>
+        </li>
+        <!-- Competitions link (current page) -->
+        <li class="nav-item" id="navCompetitions">
+          <a class="nav-link" href="competitions.html">Competitions</a>
+        </li>
+        <!-- Chat link -->
+        <li class="nav-item" id="navChat">
+          <a class="nav-link" href="chat.html">Chat</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Competitions section -->
+<div class="container-fluid" id="LeaguesPage">
+  <h1 class="text-center">Competitions</h1>
+  <!-- Container for displaying all competitions -->
+  <div id="SectionAllCompetitions"></div>
+</div>
+
+</body>
+</html>

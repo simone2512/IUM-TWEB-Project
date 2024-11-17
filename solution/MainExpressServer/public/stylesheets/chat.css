@@ -1,0 +1,27 @@
+.split {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    overflow-x: hidden;
+    padding: 20px;
+}
+.bottom {
+    position: absolute;
+    bottom: 10px;
+    width: 90%;
+}
+.red-text {
+    color: red;
+}
+
+.blue-text {
+    color: blue;
+}
+#chat_history {
+    max-height: 400px;
+    overflow-y: auto;
+}
+#chat_history p {
+    word-wrap: break-word;
+}

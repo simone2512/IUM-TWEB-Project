@@ -1,0 +1,18 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+
+__MACOSX/
+.DS_Store/
+.idea/
+.data/
+*.csv
+
+.assignmentData/*.csv
+.cleanedData/*.csv
+.DS_Store
+node_modules/
+build/
+.gradle/

@@ -1,0 +1,12 @@
+.selected {
+    background-color: blue;
+    color: white;
+}
+
+#dropdownCountries{
+    columns: 7;
+}
+
+.dropdown-item {
+    font-size: 12px;
+}

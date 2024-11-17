@@ -1,0 +1,75 @@
+
+
+.match-result {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.team-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-img-top{
+    max-width: 70%;
+    max-height: 70%;
+}
+
+.card {
+    border: 10px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+
+}
+.card-title {
+    font-size: 0.9rem;
+    height: 2.4em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.leaderboard-table {
+    border-collapse: collapse;
+    border-spacing: 10px; /* Aggiunge spazio tra le celle */
+    background: linear-gradient(to bottom, #ffffff, #f2f2f2); /* Sfondo sfumato chiaro */
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    border: 1px solid black; /* Aggiunge bordi alle celle */
+    padding: 8px; /* Aggiunge spazio interno alle celle */
+}
+
+
+.leaderboard-table thead {
+    background-color: #f2f2f2; /* Aggiunge sfondo grigio all'intestazione */
+}
+
+.leaderboard-table tbody {
+    background-color: #ffffff; /* Sfondo bianco per il corpo della tabella */
+}
+
+.team img {
+    max-width: 25px;
+    max-height: 25px;
+}
+
+
+
+
+
+.home-events-container {
+    float: left;
+    width: 45%;
+    margin-right: 5%;
+}
+
+.away-events-container {
+    float: right;
+    width: 45%;
+}
+
+.game-event {
+    margin-bottom: 10px;
+}
+
+

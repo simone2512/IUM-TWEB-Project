@@ -1,0 +1,81 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Football Statics",
+    "version": "1.0.0",
+    "description": "Football Squads Data API",
+    "x-contacts": [
+      {
+        "name": "Jacopo Malpesi",
+        "email": "jacopo.malpesi@edu.unito.it"
+      },
+      {
+        "name": "Simone Tantillo",
+        "email": "simone.tantillo@edu.unito.it"
+      },
+      {
+        "name": "Giuseppe Raso",
+        "email": "giuseppe.raso@edu.unito.it"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Main Express server sqauds"
+    }
+  ],
+  "paths": {
+    "/squads/getAllClubsCompetitionSelected": {
+      "get": {
+        "summary": "Retrieve all clubs in a selected competition",
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "GB1"
+            },
+            "description": "ID of the competition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Clubs retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "clubId": {
+                        "type": "integer",
+                        "example": 281,
+                        "description": "ID of the club"
+                      },
+                      "clubName": {
+                        "type": "string",
+                        "example": "Manchester United",
+                        "description": "Name of the club"
+                      }
+
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No clubs found for the specified competition"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+}

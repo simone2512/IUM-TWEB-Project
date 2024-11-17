@@ -1,0 +1,267 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Football Statics",
+    "version": "1.0.0",
+    "description": "Football Game Selected Data API",
+    "x-contacts": [
+      {
+        "name": "Jacopo Malpesi",
+        "email": "jacopo.malpesi@edu.unito.it"
+      },
+      {
+        "name": "Simone Tantillo",
+        "email": "simone.tantillo@edu.unito.it"
+      },
+      {
+        "name": "Giuseppe Raso",
+        "email": "giuseppe.raso@edu.unito.it"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Main Express server gameSelected"
+    }
+  ],
+  "paths": {
+    "/gameSelected/getInfoGameMongo": {
+      "get": {
+        "summary": "Retrieve information for a specific game",
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2222597
+            },
+            "description": "The ID of the game"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Information about the game",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "game_id": {
+                      "type": "integer",
+                      "example": 2222597
+                    },
+                    "competition_id": {
+                      "type": "string",
+                      "example": "RU1"
+                    },
+                    "round": {
+                      "type": "string",
+                      "example": "6. Matchday"
+                    },
+                    "date": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2012-08-25T00:00:00.000Z"
+                    },
+                    "home_club_id": {
+                      "type": "integer",
+                      "example": 3725
+                    },
+                    "away_club_id": {
+                      "type": "integer",
+                      "example": 232
+                    },
+                    "home_club_goals": {
+                      "type": "integer",
+                      "example": 2
+                    },
+                    "away_club_goals": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "stadium": {
+                      "type": "string",
+                      "example": "Akhmat-Arena"
+                    },
+                    "attendance": {
+                      "type": "integer",
+                      "example": 21700
+                    },
+                    "referee": {
+                      "type": "string",
+                      "example": "Vladislav Bezborodov"
+                    },
+                    "home_club_name": {
+                      "type": "string",
+                      "example": "RFK Akhmat Grozny"
+                    },
+                    "away_club_name": {
+                      "type": "string",
+                      "example": "FK Spartak Moskva"
+                    }
+                  }
+                },
+                "example": {
+                  "game_id": 2222597,
+                  "competition_id": "RU1",
+                  "round": "6. Matchday",
+                  "date": "2012-08-25T00:00:00.000Z",
+                  "home_club_id": 3725,
+                  "away_club_id": 232,
+                  "home_club_goals": 2,
+                  "away_club_goals": 1,
+                  "stadium": "Akhmat-Arena",
+                  "attendance": 21700,
+                  "referee": "Vladislav Bezborodov",
+                  "home_club_name": "RFK Akhmat Grozny",
+                  "away_club_name": "FK Spartak Moskva"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/gameSelected/getInfoGameEventMongo": {
+      "get": {
+        "summary": "Retrieve event information for a specific game",
+        "parameters": [
+          {
+            "name": "gameId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2222597
+            },
+            "description": "The ID of the game"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event information about the game",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "662131a59a96b677411aa19b"
+                      },
+                      "game_id": {
+                        "type": "integer",
+                        "example": 2222597
+                      },
+                      "minute": {
+                        "type": "integer",
+                        "example": 80
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "Goals"
+                      },
+                      "club_id": {
+                        "type": "integer",
+                        "example": 3725
+                      },
+                      "player_id": {
+                        "type": "integer",
+                        "example": 15102
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": ", Right-footed shot, 3. Goal of the Season Assist: , Pass, 1. Assist of the Season"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "_id": "662131a59a96b677411aa19b",
+                    "game_id": 2222597,
+                    "minute": 80,
+                    "type": "Goals",
+                    "club_id": 3725,
+                    "player_id": 15102,
+                    "description": ", Right-footed shot, 3. Goal of the Season Assist: , Pass, 1. Assist of the Season"
+                  },
+                  {
+                    "_id": "662131a59a96b677411aa19c",
+                    "game_id": 2222597,
+                    "minute": 40,
+                    "type": "Cards",
+                    "club_id": 232,
+                    "player_id": 19087,
+                    "description": "3. Yellow card  , Professional foul"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/gameSelected/getPlayerNameById": {
+      "get": {
+        "summary": "Retrieve player name by ID",
+        "parameters": [
+          {
+            "name": "player_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 5925
+            },
+            "description": "The ID of the player"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Player name",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "player_name": {
+                      "type": "string",
+                      "example": "Nicola Legrottaglie"
+                    }
+                  }
+                },
+                "example": {
+                  "player_name": "Nicola Legrottaglie"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    }
+  }
+}

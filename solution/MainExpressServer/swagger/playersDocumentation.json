@@ -1,0 +1,433 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Football Statics",
+    "version": "1.0.0",
+    "description": "Football Players Data API",
+    "x-contacts": [
+      {
+        "name": "Jacopo Malpesi",
+        "email": "jacopo.malpesi@edu.unito.it"
+      },
+      {
+        "name": "Simone Tantillo",
+        "email": "simone.tantillo@edu.unito.it"
+      },
+      {
+        "name": "Giuseppe Raso",
+        "email": "giuseppe.raso@edu.unito.it"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Main Express server players"
+    }
+  ],
+  "paths": {
+    "/players/getAllCountries": {
+      "get": {
+        "summary": "Retrieve all countries",
+        "responses": {
+          "200": {
+            "description": "A list of all countries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": [
+                      "Afghanistan",
+                      "Albania",
+                      "Algeria",
+                      "Andorra",
+                      "Angola",
+                      "Antigua and Barbuda",
+                      "Argentina",
+                      "Armenia",
+                      "Aruba",
+                      "Australia",
+                      "Austria",
+                      "Azerbaijan",
+                      "Bahrain",
+                      "Barbados",
+                      "Belarus",
+                      "Belgium",
+                      "Benin",
+                      "Bermuda",
+                      "Bolivia",
+                      "Bosnia-Herzegovina",
+                      "Brazil",
+                      "Brunei Darussalam",
+                      "Bulgaria",
+                      "Burkina Faso",
+                      "Burundi",
+                      "Cameroon",
+                      "Canada",
+                      "Cape Verde",
+                      "Central African Republic",
+                      "Chad",
+                      "Chile",
+                      "China",
+                      "Chinese Taipei",
+                      "Colombia",
+                      "Comoros",
+                      "Congo",
+                      "Costa Rica",
+                      "Cote d'Ivoire",
+                      "Croatia",
+                      "Cuba",
+                      "Curacao",
+                      "Cyprus",
+                      "Czech Republic",
+                      "DR Congo",
+                      "Denmark",
+                      "Dominican Republic",
+                      "Ecuador",
+                      "Egypt",
+                      "El Salvador",
+                      "England",
+                      "Equatorial Guinea",
+                      "Eritrea",
+                      "Estonia",
+                      "Ethiopia",
+                      "Faroe Islands",
+                      "Finland",
+                      "France",
+                      "French Guiana",
+                      "Gabon",
+                      "Georgia",
+                      "Germany",
+                      "Ghana",
+                      "Greece",
+                      "Grenada",
+                      "Guadeloupe",
+                      "Guatemala",
+                      "Guinea",
+                      "Guinea-Bissau",
+                      "Guyana",
+                      "Haiti",
+                      "Honduras",
+                      "Hungary",
+                      "Iceland"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/players/getPlayersByFilter": {
+      "get": {
+        "summary": "Retrieve players filtered by various parameters",
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "GB1"
+            },
+            "description": "The ID of the competition"
+          },
+          {
+            "name": "clubId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "example": 11
+            },
+            "description": "The ID of the club"
+          },
+          {
+            "name": "nationality",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Brazil"
+            },
+            "description": "The nationality of the player"
+          },
+          {
+            "name": "position",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Attack"
+            },
+            "description": "The position of the player"
+          },
+          {
+            "name": "subPosition",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Centre-Forward"
+            },
+            "description": "The sub-position of the player"
+          },
+          {
+            "name": "foot",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "right"
+            },
+            "description": "The preferred foot of the player"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "example": 0
+            },
+            "description": "The page number for pagination"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "example": 10
+            },
+            "description": "The number of items per page for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of players matching the filters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "content": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "playerId": {
+                            "type": "integer",
+                            "example": 363205
+                          },
+                          "firstName": {
+                            "type": "string",
+                            "example": null
+                          },
+                          "lastName": {
+                            "type": "string",
+                            "example": "Gabriel Jesus"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Gabriel Jesus"
+                          },
+                          "lastSeason": {
+                            "type": "integer",
+                            "example": 2023
+                          },
+                          "currentClubId": {
+                            "type": "integer",
+                            "example": 11
+                          },
+                          "playerCode": {
+                            "type": "string",
+                            "example": "gabriel-jesus"
+                          },
+                          "countryOfBirth": {
+                            "type": "string",
+                            "example": "Brazil"
+                          },
+                          "cityOfBirth": {
+                            "type": "string",
+                            "example": "São Paulo"
+                          },
+                          "countryOfCitizenship": {
+                            "type": "string",
+                            "example": "Brazil"
+                          },
+                          "dateOfBirth": {
+                            "type": "string",
+                            "example": "1997-04-03"
+                          },
+                          "subPosition": {
+                            "type": "string",
+                            "example": "Centre-Forward"
+                          },
+                          "position": {
+                            "type": "string",
+                            "example": "Attack"
+                          },
+                          "foot": {
+                            "type": "string",
+                            "example": "right"
+                          },
+                          "heightInCm": {
+                            "type": "integer",
+                            "example": 175
+                          },
+                          "marketValueInEur": {
+                            "type": "integer",
+                            "example": 75000000
+                          },
+                          "highestMarketValueInEur": {
+                            "type": "integer",
+                            "example": 80000000
+                          },
+                          "contractExpirationDate": {
+                            "type": "string",
+                            "example": "2027-06-30"
+                          },
+                          "agentName": {
+                            "type": "string",
+                            "example": "Energy Sports"
+                          },
+                          "imageUrl": {
+                            "type": "string",
+                            "example": "https://img.a.transfermarkt.technology/portrait/header/363205-1669711141.jpg?lm=1"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "https://www.transfermarkt.co.uk/gabriel-jesus/profil/spieler/363205"
+                          },
+                          "currentClubDomesticCompetitionId": {
+                            "type": "string",
+                            "example": "GB1"
+                          },
+                          "currentClubName": {
+                            "type": "string",
+                            "example": "Arsenal FC"
+                          }
+                        }
+                      }
+                    },
+                    "pageable": {
+                      "type": "object",
+                      "properties": {
+                        "pageNumber": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "pageSize": {
+                          "type": "integer",
+                          "example": 10
+                        },
+                        "sort": {
+                          "type": "object",
+                          "properties": {
+                            "empty": {
+                              "type": "boolean",
+                              "example": true
+                            },
+                            "sorted": {
+                              "type": "boolean",
+                              "example": false
+                            },
+                            "unsorted": {
+                              "type": "boolean",
+                              "example": true
+                            }
+                          }
+                        },
+                        "offset": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "paged": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "unpaged": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    },
+                    "last": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "totalPages": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "totalElements": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "size": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "number": {
+                      "type": "integer",
+                      "example": 0
+                    },
+                    "sort": {
+                      "type": "object",
+                      "properties": {
+                        "empty": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "sorted": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "unsorted": {
+                          "type": "boolean",
+                          "example": true
+                        }
+                      }
+                    },
+                    "first": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "numberOfElements": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "empty": {
+                      "type": "boolean",
+                      "example": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No players found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "No players found for the specified filters"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error while retrieving player data"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

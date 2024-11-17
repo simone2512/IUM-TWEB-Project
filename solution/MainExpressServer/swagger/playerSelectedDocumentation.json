@@ -1,0 +1,173 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Football Statics",
+    "version": "1.0.0",
+    "description": "Football Player Selected Data API",
+    "x-contacts": [
+      {
+        "name": "Jacopo Malpesi",
+        "email": "jacopo.malpesi@edu.unito.it"
+      },
+      {
+        "name": "Simone Tantillo",
+        "email": "simone.tantillo@edu.unito.it"
+      },
+      {
+        "name": "Giuseppe Raso",
+        "email": "giuseppe.raso@edu.unito.it"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Main Express server playerSelected"
+    }
+  ],
+  "paths": {
+    "/playerSelected/getInfoPlayerSelected": {
+      "get": {
+        "summary": "Retrieve information about a selected player",
+        "parameters": [
+          {
+            "name": "player_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 18922
+            },
+            "description": "The ID of the player"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Player information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "playerId": {
+                      "type": "integer",
+                      "example": 18922
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "Karim"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Benzema"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Karim Benzema"
+                    },
+                    "lastSeason": {
+                      "type": "integer",
+                      "example": 2022
+                    },
+                    "currentClubId": {
+                      "type": "integer",
+                      "example": 418
+                    },
+                    "playerCode": {
+                      "type": "string",
+                      "example": "karim-benzema"
+                    },
+                    "countryOfBirth": {
+                      "type": "string",
+                      "example": "France"
+                    },
+                    "cityOfBirth": {
+                      "type": "string",
+                      "example": "Lyon"
+                    },
+                    "countryOfCitizenship": {
+                      "type": "string",
+                      "example": "France"
+                    },
+                    "dateOfBirth": {
+                      "type": "string",
+                      "example": "1987-12-19"
+                    },
+                    "subPosition": {
+                      "type": "string",
+                      "example": "Centre-Forward"
+                    },
+                    "position": {
+                      "type": "string",
+                      "example": "Attack"
+                    },
+                    "foot": {
+                      "type": "string",
+                      "example": "right"
+                    },
+                    "heightInCm": {
+                      "type": "integer",
+                      "example": 185
+                    },
+                    "marketValueInEur": {
+                      "type": "integer",
+                      "example": 25000000
+                    },
+                    "highestMarketValueInEur": {
+                      "type": "integer",
+                      "example": 60000000
+                    },
+                    "contractExpirationDate": {
+                      "type": "string",
+                      "example": "2026-06-30"
+                    },
+                    "agentName": {
+                      "type": "string",
+                      "example": null
+                    },
+                    "imageUrl": {
+                      "type": "string",
+                      "example": "https://img.a.transfermarkt.technology/portrait/header/18922-1653042225.jpg?lm=1"
+                    },
+                    "url": {
+                      "type": "string",
+                      "example": "https://www.transfermarkt.co.uk/karim-benzema/profil/spieler/18922"
+                    },
+                    "currentClubDomesticCompetitionId": {
+                      "type": "string",
+                      "example": "ES1"
+                    },
+                    "currentClubName": {
+                      "type": "string",
+                      "example": "Real Madrid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Player not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Player not found for the specified player_id"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while fetching data",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal server error while retrieving player information"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

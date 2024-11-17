@@ -1,0 +1,537 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Football Statics",
+    "version": "1.0.0",
+    "description": "Index Sata API",
+    "x-contacts": [
+      {
+        "name": "Jacopo Malpesi",
+        "email": "jacopo.malpesi@edu.unito.it"
+      },
+      {
+        "name": "Simone Tantillo",
+        "email": "simone.tantillo@edu.unito.it"
+      },
+      {
+        "name": "Giuseppe Raso",
+        "email": "giuseppe.raso@edu.unito.it"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Main Express server index"
+    }
+  ],
+  "paths": {
+    "/getBestPlayers": {
+      "get": {
+        "summary": "Retrieve a list of the best players",
+        "responses": {
+          "200": {
+            "description": "A list of best players",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "playerId": {
+                        "type": "integer",
+                        "example": 342229
+                      },
+                      "firstName": {
+                        "type": "string",
+                        "example": "Kylian"
+                      },
+                      "lastName": {
+                        "type": "string",
+                        "example": "Mbappé"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Kylian Mbappé"
+                      },
+                      "lastSeason": {
+                        "type": "integer",
+                        "example": 2023
+                      },
+                      "currentClubId": {
+                        "type": "integer",
+                        "example": 583
+                      },
+                      "playerCode": {
+                        "type": "string",
+                        "example": "kylian-mbappe"
+                      },
+                      "countryOfBirth": {
+                        "type": "string",
+                        "example": "France"
+                      },
+                      "cityOfBirth": {
+                        "type": "string",
+                        "example": "Paris"
+                      },
+                      "countryOfCitizenship": {
+                        "type": "string",
+                        "example": "France"
+                      },
+                      "dateOfBirth": {
+                        "type": "string",
+                        "example": "1998-12-20"
+                      },
+                      "subPosition": {
+                        "type": "string",
+                        "example": "Centre-Forward"
+                      },
+                      "position": {
+                        "type": "string",
+                        "example": "Attack"
+                      },
+                      "foot": {
+                        "type": "string",
+                        "example": "right"
+                      },
+                      "heightInCm": {
+                        "type": "integer",
+                        "example": 178
+                      },
+                      "marketValueInEur": {
+                        "type": "integer",
+                        "example": 180000000
+                      },
+                      "highestMarketValueInEur": {
+                        "type": "integer",
+                        "example": 200000000
+                      },
+                      "contractExpirationDate": {
+                        "type": "string",
+                        "example": "2024-06-30"
+                      },
+                      "agentName": {
+                        "type": "string",
+                        "example": null
+                      },
+                      "imageUrl": {
+                        "type": "string",
+                        "example": "https://img.a.transfermarkt.technology/portrait/header/342229-1682683695.jpg?lm=1"
+                      },
+                      "url": {
+                        "type": "string",
+                        "example": "https://www.transfermarkt.co.uk/kylian-mbappe/profil/spieler/342229"
+                      },
+                      "currentClubDomesticCompetitionId": {
+                        "type": "string",
+                        "example": "FR1"
+                      },
+                      "currentClubName": {
+                        "type": "string",
+                        "example": "Paris Saint-Germain"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "playerId": 342229,
+                    "firstName": "Kylian",
+                    "lastName": "Mbappé",
+                    "name": "Kylian Mbappé",
+                    "lastSeason": 2023,
+                    "currentClubId": 583,
+                    "playerCode": "kylian-mbappe",
+                    "countryOfBirth": "France",
+                    "cityOfBirth": "Paris",
+                    "countryOfCitizenship": "France",
+                    "dateOfBirth": "1998-12-20",
+                    "subPosition": "Centre-Forward",
+                    "position": "Attack",
+                    "foot": "right",
+                    "heightInCm": 178,
+                    "marketValueInEur": 180000000,
+                    "highestMarketValueInEur": 200000000,
+                    "contractExpirationDate": "2024-06-30",
+                    "agentName": null,
+                    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/342229-1682683695.jpg?lm=1",
+                    "url": "https://www.transfermarkt.co.uk/kylian-mbappe/profil/spieler/342229",
+                    "currentClubDomesticCompetitionId": "FR1",
+                    "currentClubName": "Paris Saint-Germain"
+                  },
+                  {
+                    "playerId": 418560,
+                    "firstName": "Erling",
+                    "lastName": "Haaland",
+                    "name": "Erling Haaland",
+                    "lastSeason": 2023,
+                    "currentClubId": 281,
+                    "playerCode": "erling-haaland",
+                    "countryOfBirth": "England",
+                    "cityOfBirth": "Leeds",
+                    "countryOfCitizenship": "Norway",
+                    "dateOfBirth": "2000-07-21",
+                    "subPosition": "Centre-Forward",
+                    "position": "Attack",
+                    "foot": "left",
+                    "heightInCm": 195,
+                    "marketValueInEur": 180000000,
+                    "highestMarketValueInEur": 180000000,
+                    "contractExpirationDate": "2027-06-30",
+                    "agentName": "Rafaela Pimenta",
+                    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/418560-1694590614.jpg?lm=1",
+                    "url": "https://www.transfermarkt.co.uk/erling-haaland/profil/spieler/418560",
+                    "currentClubDomesticCompetitionId": "GB1",
+                    "currentClubName": "Manchester City"
+                  },
+                  {
+                    "playerId": 371998,
+                    "firstName": null,
+                    "lastName": "Vinicius Junior",
+                    "name": "Vinicius Junior",
+                    "lastSeason": 2023,
+                    "currentClubId": 418,
+                    "playerCode": "vinicius-junior",
+                    "countryOfBirth": "Brazil",
+                    "cityOfBirth": "São Gonçalo",
+                    "countryOfCitizenship": "Brazil",
+                    "dateOfBirth": "2000-07-12",
+                    "subPosition": "Left Winger",
+                    "position": "Attack",
+                    "foot": "right",
+                    "heightInCm": 176,
+                    "marketValueInEur": 150000000,
+                    "highestMarketValueInEur": 150000000,
+                    "contractExpirationDate": null,
+                    "agentName": "TFM Agency",
+                    "imageUrl": "https://img.a.transfermarkt.technology/portrait/header/371998-1664869583.jpg?lm=1",
+                    "url": "https://www.transfermarkt.co.uk/vinicius-junior/profil/spieler/371998",
+                    "currentClubDomesticCompetitionId": "ES1",
+                    "currentClubName": "Real Madrid"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/getBestClubs": {
+      "get": {
+        "summary": "Retrieve a list of the best clubs",
+        "responses": {
+          "200": {
+            "description": "A list of best clubs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "clubId": {
+                        "type": "integer",
+                        "example": 281
+                      },
+                      "clubCode": {
+                        "type": "string",
+                        "example": "manchester-city"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Manchester City Football Club"
+                      },
+                      "domesticCompetitionId": {
+                        "type": "string",
+                        "example": "GB1"
+                      },
+                      "squadSize": {
+                        "type": "integer",
+                        "example": 24
+                      },
+                      "averageAge": {
+                        "type": "number",
+                        "example": 27.2
+                      },
+                      "foreignersNumber": {
+                        "type": "integer",
+                        "example": 17
+                      },
+                      "foreignersPercentage": {
+                        "type": "number",
+                        "example": 70.8
+                      },
+                      "nationalTeamPlayers": {
+                        "type": "integer",
+                        "example": 21
+                      },
+                      "stadiumName": {
+                        "type": "string",
+                        "example": "Etihad Stadium"
+                      },
+                      "stadiumSeats": {
+                        "type": "integer",
+                        "example": 55017
+                      },
+                      "netTransferRecord": {
+                        "type": "string",
+                        "example": "€-126.60m"
+                      },
+                      "lastSeason": {
+                        "type": "integer",
+                        "example": 2023
+                      },
+                      "url": {
+                        "type": "string",
+                        "example": "https://www.transfermarkt.co.uk/manchester-city/startseite/verein/281"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "clubId": 281,
+                    "clubCode": "manchester-city",
+                    "name": "Manchester City Football Club",
+                    "domesticCompetitionId": "GB1",
+                    "squadSize": 24,
+                    "averageAge": 27.2,
+                    "foreignersNumber": 17,
+                    "foreignersPercentage": 70.8,
+                    "nationalTeamPlayers": 21,
+                    "stadiumName": "Etihad Stadium",
+                    "stadiumSeats": 55017,
+                    "netTransferRecord": "€-126.60m",
+                    "lastSeason": 2023,
+                    "url": "https://www.transfermarkt.co.uk/manchester-city/startseite/verein/281"
+                  },
+                  {
+                    "clubId": 583,
+                    "clubCode": "fc-paris-saint-germain",
+                    "name": "Paris Saint-Germain Football Club",
+                    "domesticCompetitionId": "FR1",
+                    "squadSize": 29,
+                    "averageAge": 25.7,
+                    "foreignersNumber": 17,
+                    "foreignersPercentage": 58.6,
+                    "nationalTeamPlayers": 19,
+                    "stadiumName": "Parc des Princes",
+                    "stadiumSeats": 49691,
+                    "netTransferRecord": "€-146.50m",
+                    "lastSeason": 2023,
+                    "url": "https://www.transfermarkt.co.uk/fc-paris-saint-germain/startseite/verein/583"
+                  },
+                  {
+                    "clubId": 11,
+                    "clubCode": "fc-arsenal",
+                    "name": "Arsenal Football Club",
+                    "domesticCompetitionId": "GB1",
+                    "squadSize": 25,
+                    "averageAge": 25.8,
+                    "foreignersNumber": 18,
+                    "foreignersPercentage": 72,
+                    "nationalTeamPlayers": 20,
+                    "stadiumName": "Emirates Stadium",
+                    "stadiumSeats": 60704,
+                    "netTransferRecord": "€-167.04m",
+                    "lastSeason": 2023,
+                    "url": "https://www.transfermarkt.co.uk/fc-arsenal/startseite/verein/11"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/getBestCompetitions": {
+      "get": {
+        "summary": "Retrieve a list of the best competitions",
+        "responses": {
+          "200": {
+            "description": "A list of best competitions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "competitionId": {
+                        "type": "string",
+                        "example": "GB1"
+                      },
+                      "competitionCode": {
+                        "type": "string",
+                        "example": "premier-league"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Premier League"
+                      },
+                      "subType": {
+                        "type": "string",
+                        "example": "first_tier"
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "domestic_league"
+                      },
+                      "countryId": {
+                        "type": "integer",
+                        "example": 189
+                      },
+                      "countryName": {
+                        "type": "string",
+                        "example": "England"
+                      },
+                      "domesticLeagueCode": {
+                        "type": "string",
+                        "example": "GB1"
+                      },
+                      "confederation": {
+                        "type": "string",
+                        "example": "europa"
+                      },
+                      "url": {
+                        "type": "string",
+                        "example": "https://www.transfermarkt.co.uk/premier-league/startseite/wettbewerb/GB1"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "competitionId": "GB1",
+                    "competitionCode": "premier-league",
+                    "name": "Premier League",
+                    "subType": "first_tier",
+                    "type": "domestic_league",
+                    "countryId": 189,
+                    "countryName": "England",
+                    "domesticLeagueCode": "GB1",
+                    "confederation": "europa",
+                    "url": "https://www.transfermarkt.co.uk/premier-league/startseite/wettbewerb/GB1"
+                  },
+                  {
+                    "competitionId": "IT1",
+                    "competitionCode": "serie-a",
+                    "name": "Serie A",
+                    "subType": "first_tier",
+                    "type": "domestic_league",
+                    "countryId": 75,
+                    "countryName": "Italy",
+                    "domesticLeagueCode": "IT1",
+                    "confederation": "europa",
+                    "url": "https://www.transfermarkt.co.uk/serie-a/startseite/wettbewerb/IT1"
+                  },
+                  {
+                    "competitionId": "ES1",
+                    "competitionCode": "laliga",
+                    "name": "La Liga",
+                    "subType": "first_tier",
+                    "type": "domestic_league",
+                    "countryId": 157,
+                    "countryName": "Spain",
+                    "domesticLeagueCode": "ES1",
+                    "confederation": "europa",
+                    "url": "https://www.transfermarkt.co.uk/laliga/startseite/wettbewerb/ES1"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/getClubValue": {
+      "get": {
+        "summary": "Retrieve the market value of a club",
+        "parameters": [
+          {
+            "name": "clubId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 11
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The market value of the club",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "example": 1127100000
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    },
+    "/getCompetitionValue": {
+      "get": {
+        "summary": "Retrieve the market value of a competition",
+        "parameters": [
+          {
+            "name": "competitionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "IT1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The market value of the competition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "example": 5745310000
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found"
+          },
+          "500": {
+            "description": "An error occurred while fetching data"
+          }
+        }
+      }
+    }
+  }
+}
